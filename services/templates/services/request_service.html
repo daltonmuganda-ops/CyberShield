@@ -1,0 +1,144 @@
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li >
+                <a href="{% url 'services' %}"> 🛠 Services
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'request_service' %} ">
+                    📋 My Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'incident' %}">
+                    ⚠ Incidents
+                </a>
+            </li>
+
+            <li>
+               <a href="{% url 'tickets' %}">
+                    🎫 Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'reports' %}">
+                    📄 Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'notifications'%}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <hr>
+
+            <li>
+                <a href="{% url 'profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+<main class="main-content">
+<hr>
+{% load static %}
+<h2>My Service Requests</h2>
+
+{% if requests.count %}
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Service</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Analyst</th>
+            <th>Response</th>
+            <th>Date Submitted</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+     <td>{{ request.service_name }}</td>
+
+            <td>{{ request.description }}</td>
+
+            <td>
+                <span class="status {{ request.status|lower }}">
+                    {{ request.status }}
+                </span>
+            </td>
+
+            <td>
+                {% if request.analyst %}
+                    {{ request.analyst.username }}
+                {% else %}
+                    Not Assigned
+                {% endif %}
+            </td>
+
+            <td>
+                {% if request.analyst_comment %}
+                    {{ request.analyst_comment }}
+                {% else %}
+                    Waiting for analyst response...
+                {% endif %}
+            </td>
+
+            <td>{{ request.created_at|date:"d M Y H:i" }}</td>
+
+        </tr>
+
+
+    {% endif %}
+
+    </tbody>
+
+</table>
+
+
+<p>You have not submitted any service requests yet.</p>
+
+</main>
+
+{% endblock %}

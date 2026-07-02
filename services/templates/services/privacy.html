@@ -1,0 +1,127 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Settings | CyberShield</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/privacy.css' %}">
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>🛡 CyberShield</h2>
+    </div>
+
+    <ul class="sidebar-menu">
+
+        <li><a href="{% url 'dashboard' %}">📊 Dashboard</a></li>
+
+        <li><a href="{% url 'services' %}">🛠 Services</a></li>
+
+        <li><a href="{% url 'request_service' %}">📋 My Requests</a></li>
+
+        <li><a href="{% url 'incident' %}">⚠ Incidents</a></li>
+
+        <li><a href="{% url 'tickets' %}">🎫 Tickets</a></li>
+
+        <li><a href="{% url 'reports' %}">📄 Reports</a></li>
+
+        <li><a href="{% url 'notifications' %}">🔔 Notifications</a></li>
+
+        <hr>
+
+        <li><a href="{% url 'profile' %}">👤 Profile</a></li>
+
+        <li class="active">
+            <a href="{% url 'settings' %}">⚙ Settings</a>
+        </li>
+
+        <li>
+            <a href="{% url 'logout' %}">🚪 Logout</a>
+        </li>
+
+    </ul>
+
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<div class="privacy-container">
+
+    <h1>🔒 Privacy Settings</h1>
+
+    <p class="subtitle">
+        Control how your account information and activity are handled.
+    </p>
+
+    <div class="privacy-card">
+
+        <h3>Email Visibility</h3>
+
+        <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+        </label>
+
+        <p>Allow administrators to view your email address.</p>
+
+    </div>
+
+    <div class="privacy-card">
+
+        <h3>Activity Tracking</h3>
+
+        <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+        </label>
+
+        <p>Allow CyberShield to store activity logs for security purposes.</p>
+
+    </div>
+
+    <div class="privacy-card">
+
+        <h3>Incident Reports</h3>
+
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+
+        <p>Keep submitted incident reports private from other users.</p>
+
+    </div>
+
+    <div class="privacy-card">
+
+        <h3>Two-Factor Authentication</h3>
+
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+
+        <p>Enable extra protection for your CyberShield account.</p>
+
+    </div>
+
+    <button class="save-btn">
+        💾 Save Changes
+    </button>
+
+</div>
+
+</main>
+
+</body>
+</html>

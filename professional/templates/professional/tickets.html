@@ -1,0 +1,190 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Tickets | CyberShield Analyst</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard_pro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tickets.css' %}">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+            <span>Analyst Portal</span>
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li class="active">
+                <a href="{% url 'professional_dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_incidents' %}">
+                    ⚠ Incident Management
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_service_requests' %}">
+                    🛠 Service Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🎫 Support Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_reports' %}">
+                    📄 Investigation Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    👥 Users
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="page-header">
+            <h1>🎫 Support Tickets</h1>
+            <p>Manage and respond to user support tickets.</p>
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Subject</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for ticket in tickets %}
+
+                    <tr>
+
+                        <td>#{{ ticket.id }}</td>
+
+                        <td>{{ ticket.user.username }}</td>
+
+                        <td>{{ ticket.subject }}</td>
+
+                        <td>
+
+                            {% if ticket.priority == "High" %}
+                                <span class="high">{{ ticket.priority }}</span>
+
+                            {% elif ticket.priority == "Medium" %}
+                                <span class="medium">{{ ticket.priority }}</span>
+
+                            {% else %}
+                                <span class="low">{{ ticket.priority }}</span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if ticket.status == "Open" %}
+                                <span class="open">{{ ticket.status }}</span>
+
+                            {% elif ticket.status == "In Progress" %}
+                                <span class="progress">{{ ticket.status }}</span>
+
+                            {% else %}
+                                <span class="closed">{{ ticket.status }}</span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>{{ ticket.created_at|date:"d M Y" }}</td>
+
+                        <td>
+                            <a href="{% url 'ticket_detail' ticket.id %}" class="btn-view">
+                                View
+                            </a>
+                        </td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+                        <td colspan="7">
+                            No support tickets found.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

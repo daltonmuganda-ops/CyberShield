@@ -1,0 +1,158 @@
+/* ==========================
+   SETTINGS PAGE
+========================== */
+
+.main-content{
+    margin-left:260px;
+    padding:40px;
+    min-height:100vh;
+    background:#f4f7fb;
+}
+
+.settings-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+/* Header */
+
+.settings-header{
+    margin-bottom:35px;
+}
+
+.settings-header h1{
+    color:#0d47a1;
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.settings-header p{
+    color:#666;
+    font-size:17px;
+}
+
+/* Grid */
+
+.settings-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+/* Cards */
+
+.setting-card{
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    text-decoration:none;
+
+    background:#fff;
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.setting-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 12px 25px rgba(13,71,161,.15);
+
+}
+
+/* Icons */
+
+.setting-card .icon{
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:32px;
+
+    background:#e8f1ff;
+    color:#0d47a1;
+
+}
+
+/* Text */
+
+.setting-card .details h3{
+
+    color:#0d47a1;
+    margin-bottom:8px;
+    font-size:22px;
+
+}
+
+.setting-card .details p{
+
+    color:#666;
+    font-size:15px;
+    line-height:1.5;
+
+}
+
+/* Danger Card */
+
+.setting-card.danger .icon{
+
+    background:#ffe8e8;
+    color:#d32f2f;
+
+}
+
+.setting-card.danger h3{
+
+    color:#d32f2f;
+
+}
+
+.setting-card.danger:hover{
+
+    box-shadow:0 12px 25px rgba(211,47,47,.18);
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.main-content{
+
+    margin-left:0;
+    padding:20px;
+
+}
+
+.settings-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.setting-card{
+
+    flex-direction:column;
+    text-align:center;
+
+}
+
+.setting-card .icon{
+
+    margin-bottom:15px;
+
+}
+
+}

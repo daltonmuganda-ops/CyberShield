@@ -1,0 +1,146 @@
+.submenu{
+    display:block;
+    list-style:none;
+    margin-left:20px;
+}
+/* ===========================
+   PROFILE PAGE
+=========================== */
+
+.main-content{
+    margin-left:260px;
+    padding:40px;
+    background:#f4f7fb;
+    min-height:100vh;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    background:#d8cdcd;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(221, 208, 208, 0.1);
+    overflow:hidden;
+}
+
+.card-body{
+    padding:40px;
+}
+
+/* ===========================
+   PROFILE IMAGE
+=========================== */
+
+.card-body img{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #0d47a1;
+    margin-bottom:20px;
+}
+
+/* ===========================
+   NAME & EMAIL
+=========================== */
+
+.card-body h3{
+    color:#0d47a1;
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.text-muted{
+    color:#777;
+    font-size:17px;
+    margin-bottom:20px;
+}
+
+/* ===========================
+   HORIZONTAL LINE
+=========================== */
+
+hr{
+    border:none;
+    border-top:1px solid #ddd;
+    margin:30px 0;
+}
+
+/* ===========================
+   DETAILS
+=========================== */
+
+.row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.col-md-6{
+    width:calc(50% - 10px);
+}
+
+.col-md-6 strong{
+    color:#0d47a1;
+    font-size:16px;
+}
+
+.col-md-6{
+    font-size:15px;
+    color:#555;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.btn{
+    display:inline-block;
+    padding:12px 28px;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:16px;
+    transition:.3s;
+}
+
+.btn-secondary{
+    background:#0d47a1;
+    color:#fff;
+}
+
+.btn-secondary:hover{
+    background:#08306b;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.main-content{
+    margin-left:0;
+    padding:20px;
+}
+
+.col-md-6{
+    width:100%;
+}
+
+.card-body{
+    padding:25px;
+}
+
+.card-body h3{
+    font-size:24px;
+}
+
+.card-body img{
+    width:110px;
+    height:110px;
+}
+
+}

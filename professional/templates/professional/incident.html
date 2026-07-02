@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Incident Management | CyberShield</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/professional.css' %}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>🛡 CyberShield</h2>
+
+            <p>Analyst Portal</p>
+
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="{% url 'professional_dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'professional_incidents' %}">
+                    ⚠ Incident Management
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🛠 Service Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🎫 Support Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_reports' %}">
+                    📄 Investigation Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    👥 Users
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <h1>Incident Management</h1>
+
+            <p>
+                Monitor and investigate cybersecurity incidents reported by users.
+            </p>
+
+        </div>
+
+        <!-- Statistics -->
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>{{ incidents.count }}</h2>
+                <p>Total Incidents</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ pending }}</h2>
+                <p>Pending</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ investigating }}</h2>
+                <p>Investigating</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ resolved }}</h2>
+                <p>Resolved</p>
+            </div>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Reporter</th>
+
+                        <th>Title</th>
+
+                        <th>Attack Type</th>
+
+                        <th>Priority</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                        <th>Assigned To</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for incident in incidents %}
+
+                    <tr>
+
+                        <td>#{{ incident.id }}</td>
+
+                        <td>{{ incident.user.username }}</td>
+
+                        <td>{{ incident.title }}</td>
+
+                        <td>{{ incident.attack_type }}</td>
+
+                        <td>
+
+                            <span class="priority {{ incident.priority|lower }}">
+
+                                {{ incident.priority }}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="status {{ incident.status|lower }}">
+
+                                {{ incident.status }}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            {{ incident.created_at|date:"d M Y" }}
+
+                        </td>
+
+                        <td>
+
+                            {% if incident.assigned_to %}
+
+                                {{ incident.assigned_to.username }}
+
+                            {% else %}
+
+                                Unassigned
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <a href="{% url 'incident_detail' incident.id %}"
+                               class="btn">
+
+                                Investigate
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+
+                        <td colspan="9">
+
+                            <center>
+
+                                No reported incidents available.
+
+                            </center>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

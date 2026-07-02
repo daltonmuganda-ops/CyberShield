@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="hero"
+style="background-image:url('{% static 'image/cs.png' %}');">
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <h1>Cybersecurity Solutions</h1>
+        <p>Protect your business.</p>
+
+        <a href="{% url 'dashboard' %}" class="btn">Get Started</a>
+
+
+    
+    </div>
+
+</section>
+<br>
+<br>
+<h2>OUR SERVICE</h2>
+
+<section class="cards">
+    
+
+            <div class="card blue">
+                <div class="icon">🛡️</div>
+
+                <h3>Vulnerability</h3>
+
+                <h1>{{ requests }}</h1>
+
+            </div>
+
+            <div class="card green">
+
+                <h3>Penetration Test</h3>
+
+                <h1>{{ tickets }}</h1>
+
+            </div>
+
+            <div class="card red">
+
+                <h3>Network Security Audit</h3>
+
+                <h1>{{ incidents }}</h1>
+
+            </div>
+
+            <div class="card purple">
+
+                <h3>Security Awareness Training</h3>
+
+                <h1>{{ reports }}</h1>
+
+            </div>
+
+        </section>
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

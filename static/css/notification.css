@@ -1,0 +1,62 @@
+cssssss
+body{
+    margin:0;
+    padding:0;
+    background:#dce0e8;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.notification-container{
+    width:100%;
+    margin:40px auto;
+}
+
+.notification-container h1{
+    color:#38bdf8;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+
+
+.notification-item{
+    background:#bfc8d4;
+    padding:18px;
+    border-radius:10px;
+    margin-bottom:18px;
+    transition:.3s;
+}
+
+.notification-item:hover{
+    transform:translateY(-3px);
+    background:#0ea5e9;
+}
+
+.notification-item h3{
+    margin:0;
+    color:#080202;
+}
+
+.notification-item p{
+    color:#0b0e13;
+    margin:10px 0;
+}
+
+.notification-item span{
+    color:#cbd5e1;
+    font-size:13px;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:12px 20px;
+    background:#0ea5e9;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+.back-btn:hover{
+    background:#0284c7;
+}

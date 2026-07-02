@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">About Our Writing Platform</h1>
+        <p class="text-muted">
+            A place where creativity, ideas, and stories come to life.
+        </p>
+    </div>
+
+    <div class="row align-items-center">
+
+        <div class="col-lg-6 mb-4">
+            <img src="{% static 'images/about-writing.jpg' %}" class="img-fluid rounded shadow" alt="Writing Platform">
+        </div>
+
+        <div class="col-lg-6">
+
+            <h3 class="fw-bold mb-3">Who We Are</h3>
+
+            <p class="text-muted">
+                Our Writing Platform is designed to empower writers by providing
+                an easy and accessible space to create, publish, and share
+                original content with readers across the world.
+            </p>
+
+            <p class="text-muted">
+                Whether you're an aspiring writer, blogger, student, researcher,
+                or experienced author, our platform helps you showcase your
+                knowledge, creativity, and unique perspective.
+            </p>
+
+            <h4 class="fw-bold mt-4">Our Mission</h4>
+
+            <p class="text-muted">
+                To inspire creativity, encourage knowledge sharing, and build a
+                community where every writer has the opportunity to be heard.
+            </p>
+
+        </div>
+
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row text-center">
+
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h2>✍️</h2>
+                    <h5>Create</h5>
+                    <p class="text-muted">
+                        Write and publish articles, blogs, stories, poems, and
+                        educational content.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h2>📚</h2>
+                    <h5>Discover</h5>
+                    <p class="text-muted">
+                        Read inspiring articles and explore ideas from writers
+                        across different fields.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h2>🌍</h2>
+                    <h5>Connect</h5>
+                    <p class="text-muted">
+                        Join a growing community that values creativity,
+                        knowledge, and meaningful conversations.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

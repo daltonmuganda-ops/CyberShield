@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyst Profile | CyberShield</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/professional.css' %}">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+            <span>Analyst Portal</span>
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="{% url 'professional_dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_incidents' %}">
+                    ⚠ Incident Management
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🛠 Service Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🎫 Support Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_reports' %}">
+                    📄 Investigation Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    👥 Users
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'professional_profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="profile-container">
+
+            <div class="profile-header">
+
+                <div class="profile-avatar">
+                    👨‍💻
+                </div>
+
+                <h1>{{ request.user.get_full_name|default:request.user.username }}</h1>
+
+                <p>Cybersecurity Analyst</p>
+
+            </div>
+
+            <div class="profile-card">
+
+                <table>
+
+                    <tr>
+                        <th>Username</th>
+                        <td>{{ request.user.username }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>First Name</th>
+                        <td>{{ request.user.first_name }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Last Name</th>
+                        <td>{{ request.user.last_name }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ request.user.email }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Role</th>
+                        <td>Cybersecurity Analyst</td>
+                    </tr>
+
+                    <tr>
+                        <th>Last Login</th>
+                        <td>{{ request.user.last_login }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Date Joined</th>
+                        <td>{{ request.user.date_joined|date:"d M Y" }}</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div class="profile-actions">
+
+                <a href="{% url 'professional_edit_profile' %}" class="btn-edit">
+                    ✏ Edit Profile
+                </a>
+
+                <a href="{% url 'professional_change_password' %}" class="btn-password">
+                    🔑 Change Password
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

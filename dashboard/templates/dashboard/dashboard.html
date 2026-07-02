@@ -1,0 +1,259 @@
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="active">
+                <a href="{% url 'dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'services' %}"> 🛠 Services
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'request_service' %} ">
+                    📋 My Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'incident' %}">
+                    ⚠ Incidents
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'tickets' %}">
+                    🎫 Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'settings' %}">
+                    📄 Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <hr>
+
+            <li>
+                <a href="{% url 'profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="dashboard-header">
+
+            <h1>Dashboard</h1>
+
+            <div class="user">
+                Welcome,
+                <strong>{{ request.user.username }}</strong>
+            </div>
+
+        </header>
+
+        <!-- Statistics -->
+        <section class="cards">
+
+            <div class="card blue">
+
+                <h3>Total Requests</h3>
+
+                <h1>{{ requests }}</h1>
+
+            </div>
+
+            <div class="card green">
+
+                <h3>Tickets</h3>
+
+                <h1>{{ tickets }}</h1>
+
+            </div>
+
+            <div class="card red">
+
+                <h3>Incidents</h3>
+
+                <h1>{{ incidents }}</h1>
+
+            </div>
+
+            <div class="card purple">
+
+                <h3>Reports</h3>
+
+                <h1>{{ reports }}</h1>
+
+            </div>
+
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="activity">
+
+            <div class="activity-card">
+
+                <h2>Recent Activity</h2>
+
+                <ul>
+
+                    <li>
+                        ✔ Service request submitted
+                    </li>
+
+                    <li>
+                        ✔ Security report generated
+                    </li>
+
+                    <li>
+                        ✔ Incident updated
+                    </li>
+
+                    <li>
+                        ✔ Ticket response received
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="activity-card">
+
+                <h2>Quick Actions</h2>
+
+                <div class="buttons">
+
+                    <a href="#" class="btn">
+                        Request Service
+                    </a>
+
+                    <a href="#" class="btn danger">
+                        Report Incident
+                    </a>
+
+                    <a href="#" class="btn">
+                        Open Ticket
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Latest Reports -->
+        <section class="table-section">
+
+            <h2>Latest Reports</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Report</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>Network Audit</td>
+
+                        <td>
+                            Completed
+                        </td>
+
+                        <td>26 Jun 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Penetration Test</td>
+
+                        <td>
+                            Pending
+                        </td>
+
+                        <td>24 Jun 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Risk Assessment</td>
+
+                        <td>
+                            Completed
+                        </td>
+
+                        <td>20 Jun 2026</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}

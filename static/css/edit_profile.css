@@ -1,0 +1,111 @@
+/* ===============================
+   CyberShield - Edit Profile
+================================= */
+
+body{
+    margin:0;
+    padding:0;
+    background:#0f172a;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Main Content */
+.main-content{
+    margin-left:260px;
+    padding:40px;
+    background-color: #e2e8f0;
+}
+
+/* Card */
+
+.card{
+    background:#ccd8eb;
+    border:none;
+    border-radius:15px;
+    color:#fff;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.card h2{
+    color:#38bdf8;
+    font-weight:bold;
+}
+
+/* Form */
+
+.form-label{
+    color:#e2e8f0;
+    font-weight:600;
+}
+
+.form-control{
+    background:#0f172a;
+    border:1px solid #334155;
+    color:#fff;
+    padding:12px;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.form-control:focus{
+    background:#0f172a;
+    color:#fff;
+    border-color:#38bdf8;
+    box-shadow:0 0 8px rgba(56,189,248,.4);
+}
+
+.form-control::placeholder{
+    color:#94a3b8;
+}
+
+/* Buttons */
+
+.btn{
+    padding:10px 22px;
+    border-radius:8px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn-primary{
+    background:#0ea5e9;
+    border:none;
+}
+
+.btn-primary:hover{
+    background:#0284c7;
+}
+
+.btn-secondary{
+    background:#475569;
+    border:none;
+}
+
+.btn-secondary:hover{
+    background:#334155;
+}
+
+/* Card spacing */
+
+.container{
+    max-width:700px;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .main-content{
+        margin-left:0;
+        padding:20px;
+    }
+
+    .container{
+        max-width:100%;
+    }
+
+    .btn{
+        width:100%;
+        margin-bottom:10px;
+    }
+}

@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications | CyberShield Analyst</title>
+
+    <link rel="stylesheet" href="{% static 'css/professional.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/notification.css' %}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+            <span>Analyst Portal</span>
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="{% url 'professional_dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_incidents' %}">
+                    ⚠ Incident Management
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🛠 Service Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🎫 Support Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_reports' %}">
+                    📄 Investigation Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    👥 Users
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'professional_notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="page-header">
+            <h1>🔔 Notifications</h1>
+            <p>Recent alerts and activities requiring your attention.</p>
+        </div>
+
+        <div class="notifications-container">
+
+            {% if notifications %}
+
+                {% for notification in notifications %}
+
+                <div class="notification-card">
+
+                    <div class="notification-icon">
+                        {% if notification.notification_type == "Incident" %}
+                            ⚠
+                        {% elif notification.notification_type == "Ticket" %}
+                            🎫
+                        {% elif notification.notification_type == "Report" %}
+                            📄
+                        {% elif notification.notification_type == "Service" %}
+                            🛠
+                        {% else %}
+                            🔔
+                        {% endif %}
+                    </div>
+
+                    <div class="notification-content">
+
+                        <h3>{{ notification.title }}</h3>
+
+                        <p>{{ notification.message }}</p>
+
+                        <small>
+                            {{ notification.created_at|date:"d M Y H:i" }}
+                        </small>
+
+                    </div>
+
+                    <div class="notification-status">
+
+                        {% if notification.is_read %}
+                            <span class="read">Read</span>
+                        {% else %}
+                            <span class="unread">New</span>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <h2>🎉 No New Notifications</h2>
+
+                    <p>
+                        You're all caught up.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/services.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'services' %}"> 🛠 Services
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'request_service' %} ">
+                    📋 My Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'incident' %}">
+                    ⚠ Incidents
+                </a>
+            </li>
+
+            <li>
+               <a href="{% url 'tickets' %}">
+                    🎫 Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'reports' %}">
+                    📄 Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'notifications'%}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <hr>
+
+            <li>
+                <a href="{% url 'profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+
+<main class="main-content">
+
+<div class="services-wrapper">
+
+    <div class="services-header">
+        <h1>Our CyberSecurity Services</h1>
+        <p>Protecting your business with advanced security solutions</p>
+    </div>
+
+    <div class="services-grid">
+
+
+        <!-- Card 1 -->
+        <div class="service-card">
+            <div class="icon">🛡️</div>
+            <h3>Vulnerability Assessment</h3>
+            <p>Identify security weaknesses in your systems before attackers do.</p>
+            <a href="#" class="btn">Request Service</a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-card">
+            <div class="icon">🎯</div>
+            <h3>Penetration Testing</h3>
+            <p>Simulated cyber attacks to test your system security strength.</p>
+            <a href="#" class="btn">Request Service</a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="service-card">
+            <div class="icon">🌐</div>
+            <h3>Network Security Audit</h3>
+            <p>Deep analysis of your network infrastructure and risks.</p>
+            <a href="#" class="btn">Request Service</a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="service-card">
+            <div class="icon">🚨</div>
+            <h3>Incident Response</h3>
+            <p>Fast response team for cyber attacks and breaches.</p>
+            <a href="#" class="btn">Request Service</a>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="service-card">
+            <div class="icon">🎓</div>
+            <h3>Security Awareness Training</h3>
+            <p>Train employees to avoid cyber threats and phishing attacks.</p>
+            <a href="#" class="btn">Request Service</a>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="service-card">
+            <div class="icon">💻</div>
+            <h3>Web Application Security</h3>
+            <p>Secure your websites and web apps from hackers.</p>
+            <a href="#" class="btn">Request Service</a>
+        </div>
+
+        
+    </div>
+</div>
+
+</main>
+
+{% endblock %}

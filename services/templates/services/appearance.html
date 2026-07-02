@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appearance | CyberShield</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/appearance.css' %}">
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>🛡 CyberShield</h2>
+    </div>
+
+    <ul class="sidebar-menu">
+
+        <li><a href="{% url 'dashboard' %}">📊 Dashboard</a></li>
+
+        <li><a href="{% url 'services' %}">🛠 Services</a></li>
+
+        <li><a href="{% url 'request_service' %}">📋 My Requests</a></li>
+
+        <li><a href="{% url 'incident' %}">⚠ Incidents</a></li>
+
+        <li><a href="{% url 'tickets' %}">🎫 Tickets</a></li>
+
+        <li><a href="{% url 'reports' %}">📄 Reports</a></li>
+
+        <li><a href="{% url 'notifications' %}">🔔 Notifications</a></li>
+
+        <hr>
+
+        <li><a href="{% url 'profile' %}">👤 Profile</a></li>
+
+        <li class="active">
+            <a href="{% url 'settings' %}">⚙ Settings</a>
+        </li>
+
+        <li><a href="{% url 'logout' %}">🚪 Logout</a></li>
+
+    </ul>
+
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<div class="appearance-container">
+
+    <h1>🎨 Appearance Settings</h1>
+
+    <p class="subtitle">
+        Customize the look and feel of CyberShield.
+    </p>
+
+    <div class="appearance-card">
+
+        <h3>Choose Theme</h3>
+
+        <form>
+
+            <label>
+                <input type="radio" name="theme" checked>
+                ☀️ Light Mode
+            </label>
+
+            <br><br>
+
+            <label>
+                <input type="radio" name="theme">
+                🌙 Dark Mode
+            </label>
+
+            <br><br>
+
+            <label>
+                <input type="radio" name="theme">
+                💻 System Default
+            </label>
+
+        </form>
+
+    </div>
+
+    <div class="appearance-card">
+
+        <h3>Font Size</h3>
+
+        <select>
+
+            <option>Small</option>
+
+            <option selected>Medium</option>
+
+            <option>Large</option>
+
+        </select>
+
+    </div>
+
+    <div class="appearance-card">
+
+        <h3>Dashboard Layout</h3>
+
+        <label>
+            <input type="checkbox" checked>
+            Enable Compact Layout
+        </label>
+
+    </div>
+
+    <button class="save-btn">
+        💾 Save Appearance
+    </button>
+
+</div>
+
+</main>
+
+</body>
+</html>

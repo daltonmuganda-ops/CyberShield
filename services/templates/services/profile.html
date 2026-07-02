@@ -1,0 +1,166 @@
+
+
+{% load static %}
+
+{% block content %}
+
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>🛡 CyberShield</h2>
+    </div>
+
+    <ul class="sidebar-menu">
+        <li>
+            <a href="{% url 'dashboard' %}">
+                📊 Dashboard
+            </a>
+        </li>
+
+        <li >
+            <a href="{% url 'services' %}"> 🛠 Services
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'request_service' %} ">
+                📋 My Requests
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'incident' %}">
+                ⚠ Incidents
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'tickets' %}">
+                🎫 Tickets
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'reports' %}">
+                📄 Reports
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'notifications' %}">
+                🔔 Notifications
+            </a>
+        </li>
+
+        <hr>
+
+       <li>
+
+       <li>
+                <a href="{% url 'profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+        <li>
+            <a href="{% url 'settings' %}">
+                ⚙ Settings
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'logout' %}">
+                🚪 Logout
+            </a>
+        </li>
+
+    </ul>
+
+</aside>
+
+
+
+{% block title %}My Profile{% endblock %}
+<main class="main-content">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+
+                    <!-- Profile Picture -->
+                    <img src="{% static 'images/default-profile.png' %}"
+                         class="rounded-circle mb-3"
+                         width="140"
+                         height="140"
+                         alt="Profile Picture">
+
+                    <h3>{{ request.user.username }}</h3>
+                    <p class="text-muted">{{ request.user.email }}</p>
+
+                    <hr>
+
+                    <div class="row text-start mt-4">
+
+                        <div class="col-md-6 mb-3">
+                            <strong>Username</strong><br>
+                            {{ request.user.username }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>Email</strong><br>
+                            {{ request.user.email }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>First Name</strong><br>
+                            {{ request.user.first_name|default:"Not provided" }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>Last Name</strong><br>
+                            {{ request.user.last_name|default:"Not provided" }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>Date Joined</strong><br>
+                            {{ request.user.date_joined }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>Last Login</strong><br>
+                            {{ request.user.last_login }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <strong>Date of birth</strong><br>
+                            {{ request.user.date_of_birth}}
+                        </div>
+
+                    </div>
+                   
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</main>
+
+<script>
+function toggleProfileMenu() {
+    const menu = document.getElementById("profileMenu");
+
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+</script>
+{% endblock %}

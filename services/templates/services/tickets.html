@@ -1,0 +1,111 @@
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li >
+                <a href="{% url 'services' %}"> 🛠 Services
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'request_service' %} ">
+                    📋 My Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'incident' %}">
+                    ⚠ Incidents
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'tickets' %}">
+                    🎫 Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'reports' %}">
+                    📄 Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'notifications'%}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <hr>
+
+            <li>
+                <a href="{% url 'profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+{% load static %}
+<main class="main-content">
+
+<tbody>
+
+{% for ticket in tickets %}
+
+<tr>
+    <td>#{{ ticket.id }}</td>
+    <td>{{ ticket.subject }}</td>
+
+    <td>
+        <span class="{{ ticket.status|lower }}">
+            {{ ticket.status }}
+        </span>
+    </td>
+
+    <td>{{ ticket.priority }}</td>
+    <td>{{ ticket.created_at|date:"d M Y" }}</td>
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="5">
+        You have not created any tickets yet.
+    </td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+</main>
+{% endblock %}

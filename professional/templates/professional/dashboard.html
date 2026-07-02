@@ -1,0 +1,369 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield Analyst Dashboard</title>
+
+    <link rel="stylesheet" href="{% static 'css/professional.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+            <p>Analyst Portal</p>
+        </div>
+
+        <ul class="menu">
+
+            <li class="active">
+                <a href="{% url 'professional_dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_incidents' %}">
+                    ⚠ Incident Management
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🛠 Service Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🎫 Support Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_reports' %}">
+                    📄 Investigation Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    👥 Users
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="header">
+
+            <div>
+
+                <h1>
+                    Welcome,
+                    {{ request.user.first_name|default:request.user.username }}
+                </h1>
+
+                <p>
+                    Security Operations Center Dashboard
+                </p>
+
+            </div>
+
+        </header>
+
+        <!-- Statistics -->
+
+        <section class="cards">
+
+            <div class="card">
+                <h2>{{ total_incidents }}</h2>
+                <p>Total Incidents</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ pending_incidents }}</h2>
+                <p>Pending</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ investigating_incidents }}</h2>
+                <p>Investigating</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ resolved_incidents }}</h2>
+                <p>Resolved</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ open_tickets }}</h2>
+                <p>Open Tickets</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ service_requests }}</h2>
+                <p>Pending Requests</p>
+            </div>
+
+        </section>
+
+        <!-- Recent Incidents -->
+
+        <section class="panel">
+
+            <h2>Latest Reported Incidents</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>User</th>
+
+                        <th>Title</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for incident in recent_incidents %}
+
+                    <tr>
+
+                        <td>#{{ incident.id }}</td>
+
+                        <td>{{ incident.user.username }}</td>
+
+                        <td>{{ incident.title }}</td>
+
+                        <td>{{ incident.status }}</td>
+
+                        <td>{{ incident.created_at|date:"d M Y" }}</td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+
+                        <td colspan="5">
+
+                            No incidents available.
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- Tickets -->
+
+        <section class="panel">
+
+            <h2>Recent Support Tickets</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>User</th>
+
+                        <th>Subject</th>
+
+                        <th>Priority</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for ticket in recent_tickets %}
+
+                    <tr>
+
+                        <td>#{{ ticket.id }}</td>
+
+                        <td>{{ ticket.user.username }}</td>
+
+                        <td>{{ ticket.subject }}</td>
+
+                        <td>{{ ticket.priority }}</td>
+
+                        <td>{{ ticket.status }}</td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+
+                        <td colspan="5">
+
+                            No support tickets.
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- Pending Service Requests -->
+
+        <section class="panel">
+
+            <h2>Pending Service Requests</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>User</th>
+
+                        <th>Service</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for request in pending_requests %}
+
+                    <tr>
+
+                        <td>#{{ request.id }}</td>
+
+                        <td>{{ request.user.username }}</td>
+
+                        <td>{{ request.service_name }}</td>
+
+                        <td>{{ request.status }}</td>
+
+                        <td>{{ request.created_at|date:"d M Y" }}</td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+
+                        <td colspan="5">
+
+                            No pending service requests.
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- Quick Actions -->
+
+        <section class="actions">
+
+            <a href="#" class="btn">
+                View Incidents
+            </a>
+
+            <a href="#" class="btn">
+                Manage Tickets
+            </a>
+
+            <a href="#" class="btn">
+                Review Requests
+            </a>
+
+            <a href="#" class="btn">
+                Upload Report
+            </a>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+
+    {% if form.errors %}
+        <div style="color:red;">
+            {{ form.errors }}
+        </div>
+    {% endif %}
+
+    <button type="submit" class="btn">Register</button>
+</form>
+{% endblock %}

@@ -1,0 +1,133 @@
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/notification.css' %}">
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>🛡 CyberShield</h2>
+    </div>
+
+    <ul class="sidebar-menu">
+        <li>
+            <a href="{% url 'dashboard' %}">
+                📊 Dashboard
+            </a>
+        </li>
+
+        <li >
+            <a href="{% url 'services' %}"> 🛠 Services
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'request_service' %} ">
+                📋 My Requests
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'incident' %}">
+                ⚠ Incidents
+            </a>
+        </li>
+
+        <li>
+           <a href="{% url 'tickets' %}">
+                🎫 Tickets
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'reports' %}">
+                📄 Reports
+            </a>
+        </li>
+
+        <li class="active">
+            <a href="{% url 'notifications' %}">
+                🔔 Notifications
+            </a>
+        </li>
+
+        <hr>
+
+        <li>
+            <a href="{% url 'profile' %}">
+                👤 Profile
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'settings' %}">
+                ⚙ Settings
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'logout' %}">
+                🚪 Logout
+            </a>
+        </li>
+
+    </ul>
+
+</aside>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Notifications | CyberShield</title>
+
+    
+</head>
+
+<body>
+<main class="main-content">
+<div class="notification-container">
+
+    <h1>🔔 Notifications</h1>
+
+    <div class="notification-card">
+
+        <div class="notification-item">
+            <h3>🛡 Security Alert</h3>
+            <p>A new login was detected from your account.</p>
+            <span>Today • 10:35 AM</span>
+        </div>
+
+        <div class="notification-item">
+            <h3>🎫 Ticket Updated</h3>
+            <p>Your support ticket has been updated.</p>
+            <span>Yesterday • 3:45 PM</span>
+        </div>
+
+        <div class="notification-item">
+            <h3>⚠ Incident Report</h3>
+            <p>Your incident report has been reviewed.</p>
+            <span>2 days ago</span>
+        </div>
+
+        <div class="notification-item">
+            <h3>📢 System Update</h3>
+            <p>CyberShield security improvements have been deployed.</p>
+            <span>Last Week</span>
+        </div>
+
+    </div>
+
+    
+
+</div>
+
+</body>
+</html>
+</main>
+
+{% endblock %}

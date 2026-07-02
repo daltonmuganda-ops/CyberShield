@@ -1,0 +1,185 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | CyberShield Analyst</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/professional.css' %}">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+            <span>Analyst Portal</span>
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="{% url 'professional_dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_incidents' %}">
+                    ⚠ Incident Management
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🛠 Service Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🎫 Support Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_reports' %}">
+                    📄 Investigation Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    👥 Users
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'professional_settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="settings-container">
+
+            <div class="settings-header">
+                <h1>⚙ Analyst Settings</h1>
+                <p>
+                    Manage your CyberShield analyst account and preferences.
+                </p>
+            </div>
+
+            <div class="settings-grid">
+
+                <!-- Profile -->
+                <a href="{% url 'professional_edit_profile' %}" class="setting-card">
+
+                    <div class="icon">👤</div>
+
+                    <div class="details">
+                        <h3>Edit Profile</h3>
+                        <p>Update your personal information.</p>
+                    </div>
+
+                </a>
+
+                <!-- Password -->
+                <a href="{% url 'professional_change_password' %}" class="setting-card">
+
+                    <div class="icon">🔑</div>
+
+                    <div class="details">
+                        <h3>Change Password</h3>
+                        <p>Update your account password.</p>
+                    </div>
+
+                </a>
+
+                <!-- Appearance -->
+                <a href="{% url 'professional_appearance' %}" class="setting-card">
+
+                    <div class="icon">🎨</div>
+
+                    <div class="details">
+                        <h3>Appearance</h3>
+                        <p>Customize the dashboard appearance.</p>
+                    </div>
+
+                </a>
+
+                <!-- Privacy -->
+                <a href="{% url 'professional_privacy' %}" class="setting-card">
+
+                    <div class="icon">🔒</div>
+
+                    <div class="details">
+                        <h3>Privacy</h3>
+                        <p>Manage your privacy and security settings.</p>
+                    </div>
+
+                </a>
+
+                <!-- Notifications -->
+                <a href="{% url 'professional_notifications' %}" class="setting-card">
+
+                    <div class="icon">🔔</div>
+
+                    <div class="details">
+                        <h3>Notifications</h3>
+                        <p>View recent alerts and notifications.</p>
+                    </div>
+
+                </a>
+
+                <!-- Account -->
+                <a href="{% url 'professional_account' %}" class="setting-card">
+
+                    <div class="icon">⚙</div>
+
+                    <div class="details">
+                        <h3>Account</h3>
+                        <p>Manage account information.</p>
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Investigate Incident | CyberShield</title>
+
+    <link rel="stylesheet"
+          href="{% static 'professional/css/professional.css' %}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>🛡 CyberShield</h2>
+
+            <p>Analyst Portal</p>
+
+        </div>
+
+        <ul class="menu">
+
+            <li class="active">
+                <a href="{% url 'professional_dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_incidents' %}">
+                    ⚠ Incident Management
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🛠 Service Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🎫 Support Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_reports' %}">
+                    📄 Investigation Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    👥 Users
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <h1>Incident Investigation</h1>
+
+            <a href="{% url 'professional_incidents' %}"
+               class="btn">
+
+                ← Back
+
+            </a>
+
+        </div>
+
+        <!-- Incident Information -->
+
+        <div class="card">
+
+            <h2>Incident Information</h2>
+
+            <table class="details-table">
+
+                <tr>
+                    <th>Incident ID</th>
+                    <td>#{{ incident.id }}</td>
+                </tr>
+
+                <tr>
+                    <th>Reported By</th>
+                    <td>{{ incident.user.username }}</td>
+                </tr>
+
+                <tr>
+                    <th>Email</th>
+                    <td>{{ incident.user.email }}</td>
+                </tr>
+
+                <tr>
+                    <th>Title</th>
+                    <td>{{ incident.title }}</td>
+                </tr>
+
+                <tr>
+                    <th>Attack Type</th>
+                    <td>{{ incident.attack_type }}</td>
+                </tr>
+
+                <tr>
+                    <th>Description</th>
+                    <td>{{ incident.description }}</td>
+                </tr>
+
+                <tr>
+                    <th>Reported On</th>
+                    <td>{{ incident.created_at }}</td>
+                </tr>
+
+                <tr>
+                    <th>Current Status</th>
+                    <td>{{ incident.status }}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <br>
+
+        <!-- Evidence -->
+
+        <div class="card">
+
+            <h2>Uploaded Evidence</h2>
+
+            {% if incident.evidence %}
+
+                <a href="{{ incident.evidence.url }}"
+                   target="_blank"
+                   class="btn">
+
+                    View / Download Evidence
+
+                </a>
+
+            {% else %}
+
+                <p>No evidence uploaded.</p>
+
+            {% endif %}
+
+        </div>
+
+        <br>
+
+        <!-- Investigation Form -->
+
+        <div class="card">
+
+            <h2>Investigation Panel</h2>
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <label>Status</label>
+
+                <select name="status">
+
+                    {% for value,label in incident.STATUS_CHOICES %}
+
+                        <option value="{{ value }}"
+                        {% if incident.status == value %}
+                        selected
+                        {% endif %}>
+
+                            {{ label }}
+
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <br><br>
+
+                <label>Priority</label>
+
+                <select name="priority">
+
+                    {% for value,label in incident.PRIORITY_CHOICES %}
+
+                        <option value="{{ value }}"
+                        {% if incident.priority == value %}
+                        selected
+                        {% endif %}>
+
+                            {{ label }}
+
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <br><br>
+
+                <label>Assign Analyst</label>
+
+                <select name="assigned_to">
+
+                    <option value="">----------</option>
+
+                    {% for analyst in analysts %}
+
+                    <option value="{{ analyst.id }}"
+                    {% if incident.assigned_to == analyst %}
+                    selected
+                    {% endif %}>
+
+                        {{ analyst.username }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <br><br>
+
+                <label>Investigation Notes</label>
+
+                <textarea
+                    name="investigation_notes"
+                    rows="10">{{ incident.investigation_notes }}</textarea>
+
+                <br><br>
+
+                <label>Upload Investigation Report (PDF)</label>
+
+                <input
+                    type="file"
+                    name="investigation_report">
+
+                <br><br>
+
+                {% if incident.investigation_report %}
+
+                    <p>
+
+                        Current Report
+
+                        <a href="{{ incident.investigation_report.url }}"
+                           target="_blank">
+
+                            Download
+
+                        </a>
+
+                    </p>
+
+                {% endif %}
+
+                <button
+                    type="submit"
+                    class="btn">
+
+                    Save Investigation
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

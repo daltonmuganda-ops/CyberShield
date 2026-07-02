@@ -1,0 +1,145 @@
+
+{% load static %}
+
+{% block title %}Edit Profile{% endblock %}
+
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>🛡 CyberShield</h2>
+    </div>
+
+    <ul class="sidebar-menu">
+        <li>
+            <a href="{% url 'dashboard' %}">
+                📊 Dashboard
+            </a>
+        </li>
+
+        <li >
+            <a href="{% url 'services' %}"> 🛠 Services
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'request_service' %} ">
+                📋 My Requests
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'incident' %}">
+                ⚠ Incidents
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'tickets' %}">
+                🎫 Tickets
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'reports' %}">
+                📄 Reports
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'notifications' %}">
+                🔔 Notifications
+            </a>
+        </li>
+
+        <hr>
+
+        <li>
+                <a href="{% url 'profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+        <li>
+            <a href="{% url 'settings' %}">
+                ⚙ Settings
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                🚪 Logout
+            </a>
+        </li>
+
+    </ul>
+
+</aside>
+
+<main class="main-content">
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Edit Profile</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text"
+                       name="username"
+                       class="form-control"
+                       value="{{ request.user.username }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text"
+                       name="first_name"
+                       class="form-control"
+                       value="{{ request.user.first_name }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text"
+                       name="last_name"
+                       class="form-control"
+                       value="{{ request.user.last_name }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       value="{{ request.user.email }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Date of birth</label>
+                <input type="Date of birth"
+                       name="Date of birth"
+                       class="form-control"
+                       value="{{ request.user.date_of_birth }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Save Changes
+            </button>
+
+            <a href="{% url 'profile' %}" class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+    </div>
+</div>
+</main>
+{% endblock %}

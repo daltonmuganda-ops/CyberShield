@@ -1,0 +1,188 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Details | CyberShield Analyst</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard_pro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/report_detail.css' %}">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+            <span>Analyst Portal</span>
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li class="active">
+                <a href="{% url 'professional_dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_incidents' %}">
+                    ⚠ Incident Management
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_service_requests' %}">
+                    🛠 Service Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🎫 Support Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_report' %}">
+                    📄 Investigation Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    👥 Users
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_profile' %}">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_settings' %}">
+                    ⚙ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="page-header">
+            <h1>📄 Investigation Report</h1>
+        </div>
+
+        <div class="detail-card">
+
+            <table class="detail-table">
+
+                <tr>
+                    <th>Report ID</th>
+                    <td>#{{ report.id }}</td>
+                </tr>
+
+                <tr>
+                    <th>User</th>
+                    <td>{{ report.user.username }}</td>
+                </tr>
+
+                <tr>
+                    <th>Title</th>
+                    <td>{{ report.title }}</td>
+                </tr>
+
+                <tr>
+                    <th>Created On</th>
+                    <td>{{ report.created_at|date:"d M Y H:i" }}</td>
+                </tr>
+
+                <tr>
+                    <th>Report</th>
+                    <td>
+                        {{ report.report }}
+                    </td>
+                </tr>
+
+            </table>
+
+            <hr>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <label><strong>Status</strong></label>
+
+                <select name="status">
+
+                    <option value="Pending">Pending</option>
+
+                    <option value="Under Review">Under Review</option>
+
+                    <option value="Completed">Completed</option>
+
+                </select>
+
+                <br><br>
+
+                <label><strong>Investigation Findings</strong></label>
+
+                <textarea
+                    name="findings"
+                    rows="6"
+                    placeholder="Write investigation findings here..."
+                ></textarea>
+
+                <br><br>
+
+                <label><strong>Recommendations</strong></label>
+
+                <textarea
+                    name="recommendations"
+                    rows="5"
+                    placeholder="Security recommendations..."
+                ></textarea>
+
+                <br><br>
+
+                <button type="submit" class="btn-save">
+                    Save Report
+                </button>
+
+                <a href="{% url 'professional_reports' %}" class="btn-back">
+                    Back
+                </a>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
