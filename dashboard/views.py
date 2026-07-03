@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from services.models import (ServiceRequest,Incident,Ticket,SecurityReport,)
+
+from services.models import (
+    Services,
+    Incident,
+    Ticket,
+    SecurityReport,
+)
 
 
 # Home page
@@ -12,14 +18,14 @@ def home(request):
 @login_required(login_url="login")
 def dashboard(request):
 
-    requests = ServiceRequest.objects.filter(
+    requests = Services.objects.filter(
         user=request.user
     ).count()
 
     incidents = Incident.objects.filter(
         user=request.user
     ).count()
-    
+
     tickets = Ticket.objects.filter(
         user=request.user
     ).count()

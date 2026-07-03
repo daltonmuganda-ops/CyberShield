@@ -16,7 +16,7 @@
 
     <ul class="sidebar-menu">
         <li>
-            <a href="{% url 'dashboard' %}">
+            <a href="{% url 'user_dashboard' %}">
                 📊 Dashboard
             </a>
         </li>
@@ -70,6 +70,13 @@
                 ⚙ Settings
             </a>
         </li>
+         {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
+        <li>
+            <a href="{% url 'professional_dashboard' %}">
+                🛡 Professional Portal
+            </a>
+        </li>
+        {% endif %}
 
         <li>
             <a href="{% url 'logout' %}">
@@ -85,71 +92,102 @@
 
 {% block title %}My Profile{% endblock %}
 <main class="main-content">
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
+{% load static %}
 
-            <div class="card shadow border-0">
-                <div class="card-body text-center">
 
-                    <!-- Profile Picture -->
-                    <img src="{% static 'images/default-profile.png' %}"
-                         class="rounded-circle mb-3"
-                         width="140"
-                         height="140"
-                         alt="Profile Picture">
+<h2>My Profile</h2>
 
-                    <h3>{{ request.user.username }}</h3>
-                    <p class="text-muted">{{ request.user.email }}</p>
+<form method="POST" enctype="multipart/form-data">
 
-                    <hr>
+    {% csrf_token %}
 
-                    <div class="row text-start mt-4">
+    <div>
 
-                        <div class="col-md-6 mb-3">
-                            <strong>Username</strong><br>
-                            {{ request.user.username }}
-                        </div>
+        {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture.url }}"
+                 width="150"
+                 height="150">
+        {% endif %}
 
-                        <div class="col-md-6 mb-3">
-                            <strong>Email</strong><br>
-                            {{ request.user.email }}
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <strong>First Name</strong><br>
-                            {{ request.user.first_name|default:"Not provided" }}
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <strong>Last Name</strong><br>
-                            {{ request.user.last_name|default:"Not provided" }}
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <strong>Date Joined</strong><br>
-                            {{ request.user.date_joined }}
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <strong>Last Login</strong><br>
-                            {{ request.user.last_login }}
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <strong>Date of birth</strong><br>
-                            {{ request.user.date_of_birth}}
-                        </div>
-
-                    </div>
-                   
-
-                </div>
-            </div>
-
-        </div>
     </div>
-</div>
+
+    <br>
+
+    <label>Profile Picture</label>
+
+    <input
+        type="file"
+        name="profile_picture"
+    >
+
+    <br><br>
+
+    <label>First Name</label>
+
+    <input
+        type="text"
+        name="first_name"
+        value="{{ request.user.first_name }}"
+    >
+
+    <br><br>
+
+    <label>Last Name</label>
+
+    <input
+        type="text"
+        name="last_name"
+        value="{{ request.user.last_name }}"
+    >
+
+    <br><br>
+
+    <label>Email</label>
+
+    <input
+        type="email"
+        name="email"
+        value="{{ request.user.email }}"
+    >
+
+    <br><br>
+
+    <label>Phone</label>
+
+    <input
+        type="text"
+        name="phone"
+        value="{{ profile.phone }}"
+    >
+
+    <br><br>
+
+    <label>County</label>
+
+    <input
+        type="text"
+        name="county"
+        value="{{ profile.county }}"
+    >
+
+    <br><br>
+
+    <label>Address</label>
+
+    <textarea
+        name="address"
+        rows="4"
+    >{{ profile.address }}</textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Update Profile
+    </button>
+
+</form>
+
+{% endblock %}
 </main>
 
 <script>
@@ -163,4 +201,3 @@ function toggleProfileMenu() {
     }
 }
 </script>
-{% endblock %}

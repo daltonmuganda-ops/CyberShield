@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support Tickets | CyberShield Analyst</title>
 
-    <link rel="stylesheet" href="{% static 'css/dashboard_pro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'css/tickets.css' %}">
 </head>
 <body>
@@ -24,7 +24,7 @@
 
         <ul class="sidebar-menu">
 
-            <li class="active">
+            <li>
                 <a href="{% url 'professional_dashboard' %}">
                     📊 Dashboard
                 </a>
@@ -37,21 +37,22 @@
             </li>
 
             <li>
-                <a href="{% url 'professional_service_requests' %}">
+                <a href="{% url 'request_service' %}">
                     🛠 Service Requests
                 </a>
             </li>
 
-            <li>
+            <li class="active">
                 <a href="#">
                     🎫 Support Tickets
                 </a>
             </li>
 
             <li>
-                <a href="{% url 'professional_reports' %}">
-                    📄 Investigation Reports
-                </a>
+            <a href="{% url 'report' %}">
+                <i class="fas fa-chart-line"></i>
+                <span>Reports</span>
+            </a>
             </li>
 
             <li>
@@ -159,7 +160,7 @@
                         <td>{{ ticket.created_at|date:"d M Y" }}</td>
 
                         <td>
-                            <a href="{% url 'ticket_detail' ticket.id %}" class="btn-view">
+                            <a href="{% url 'ticket_details' ticket.id %}" class="btn-view">
                                 View
                             </a>
                         </td>

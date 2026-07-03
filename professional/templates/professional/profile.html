@@ -8,7 +8,7 @@
     <title>Analyst Profile | CyberShield</title>
 
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-    <link rel="stylesheet" href="{% static 'css/professional.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
 
@@ -32,31 +32,31 @@
 
             <li>
                 <a href="{% url 'professional_incidents' %}">
-                    ⚠ Incident Management
+                    🚨 Incident Management
                 </a>
             </li>
-
+            
             <li>
-                <a href="#">
+                <a href="{% url 'professional_services' %}">
                     🛠 Service Requests
                 </a>
             </li>
 
             <li>
-                <a href="#">
-                    🎫 Support Tickets
+                <a href="{% url 'professional_tickets' %}">
+                    🎫 Tickets
                 </a>
             </li>
 
             <li>
-                <a href="{% url 'professional_reports' %}">
-                    📄 Investigation Reports
+                <a href="{% url 'report' %}">
+                    📈 Reports & Analytics
                 </a>
             </li>
 
             <li>
-                <a href="#">
-                    👥 Users
+                <a href="/admin/auth/user/">
+                    👥 User Management
                 </a>
             </li>
 
@@ -68,13 +68,13 @@
 
             <li class="active">
                 <a href="{% url 'professional_profile' %}">
-                    👤 Profile
+                    👤 My Profile
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_settings' %}">
-                    ⚙ Settings
+                    ⚙️ Settings
                 </a>
             </li>
 
@@ -83,6 +83,7 @@
                     🚪 Logout
                 </a>
             </li>
+
         </ul>
 
     </aside>
@@ -149,11 +150,11 @@
 
             <div class="profile-actions">
 
-                <a href="{% url 'professional_edit_profile' %}" class="btn-edit">
+                <a href="{% url 'edit_profile' %}" class="btn-edit">
                     ✏ Edit Profile
                 </a>
 
-                <a href="{% url 'professional_change_password' %}" class="btn-password">
+                <a href="{% url 'change_password' %}" class="btn-password">
                     🔑 Change Password
                 </a>
 

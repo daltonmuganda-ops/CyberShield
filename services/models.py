@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+import random
+import string
+import uuid
 
 
-# ==========================
-# SERVICE REQUEST
-# ==========================
 
-class ServiceRequest(models.Model):
+class Services(models.Model):
 
     STATUS_CHOICES = [
         ("Pending", "Pending"),
@@ -15,14 +16,18 @@ class ServiceRequest(models.Model):
         ("Rejected", "Rejected"),
     ]
 
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     service_name = models.CharField(max_length=200)
 
     description = models.TextField()
+
+    service_number = models.CharField(
+        max_length=20,
+        unique=True,
+        editable=False,
+        blank=True
+    )
 
     status = models.CharField(
         max_length=20,
@@ -30,22 +35,12 @@ class ServiceRequest(models.Model):
         default="Pending"
     )
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
-
-    def __str__(self):
-        return f"{self.service_name} - {self.user.username}"
     analyst = models.ForeignKey(
-    User,
-    on_delete=models.SET_NULL,
-    null=True,
-    blank=True,
-    related_name="assigned_services"
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="assigned_services"
     )
 
     analyst_comment = models.TextField(
@@ -53,6 +48,16 @@ class ServiceRequest(models.Model):
         null=True
     )
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.service_name} - {self.user.username}"
+
+    def save(self, *args, **kwargs):
+        if not self.service_number:
+            self.service_number = f"SRV-{uuid.uuid4().hex[:8].upper()}"
+        super().save(*args, **kwargs)
 # ==========================
 # INCIDENT REPORT
 # ==========================
@@ -162,6 +167,22 @@ class Incident(models.Model):
 # SUPPORT TICKET
 # ==========================
 
+def generate_ticket_number():
+    while True:
+        year = timezone.now().year
+
+        random_code = "".join(
+            random.choices(
+                string.ascii_uppercase + string.digits,
+                k=6
+            )
+        )
+
+        ticket_number = f"TKT-{year}-{random_code}"
+
+        if not Ticket.objects.filter(ticket_number=ticket_number).exists():
+            return ticket_number
+
 class Ticket(models.Model):
 
     PRIORITY_CHOICES = [
@@ -175,6 +196,14 @@ class Ticket(models.Model):
         ("In Progress", "In Progress"),
         ("Closed", "Closed"),
     ]
+
+    ticket_number = models.CharField(
+        max_length=20,
+        unique=True,
+        editable=False,
+        blank=True
+    )
+    
 
     user = models.ForeignKey(
         User,
@@ -191,6 +220,17 @@ class Ticket(models.Model):
         default="Medium"
     )
 
+    category = models.CharField(
+        max_length=100,
+        blank=True,
+        default=""
+    )
+
+    ai_summary = models.TextField(
+        blank=True,
+        default=""
+    )
+
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
@@ -202,8 +242,34 @@ class Ticket(models.Model):
     )
 
     def __str__(self):
-        return self.subject
+        return f"{self.ticket_number} - {self.subject}"
 
+
+class TicketMessage(models.Model):
+
+    ticket = models.ForeignKey(
+        Ticket,
+        on_delete=models.CASCADE,
+        related_name="messages"
+    )
+
+    sender = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    message = models.TextField()
+
+    is_ai = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.sender.username} - {self.ticket.subject}"
 
 # ==========================
 # SECURITY REPORT
@@ -232,8 +298,19 @@ class SecurityReport(models.Model):
 # USER SETTINGS
 # ==========================
 
+
 class UserSettings(models.Model):
 
+    ROLE_CHOICES = [
+        ("user", "User"),
+        ("analyst", "Analyst"),
+        ("admin", "Admin"),
+    ]
+
+    
+    # ==========================
+    # APPEARANCE SETTINGS
+    # ==========================
     THEME_CHOICES = [
         ("light", "Light"),
         ("dark", "Dark"),
@@ -252,7 +329,13 @@ class UserSettings(models.Model):
         related_name="settings"
     )
 
-    # Appearance
+    role = models.CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default="user"
+    )
+
+
     theme = models.CharField(
         max_length=20,
         choices=THEME_CHOICES,
@@ -265,52 +348,39 @@ class UserSettings(models.Model):
         default="medium"
     )
 
-    compact_layout = models.BooleanField(
-        default=False
-    )
+    compact_layout = models.BooleanField(default=False)
 
-    # Privacy
-    email_visibility = models.BooleanField(
-        default=True
-    )
+    # ==========================
+    # PRIVACY SETTINGS
+    # ==========================
+    email_visibility = models.BooleanField(default=True)
+    activity_tracking = models.BooleanField(default=True)
+    private_profile = models.BooleanField(default=False)
 
-    activity_tracking = models.BooleanField(
-        default=True
-    )
+    # ==========================
+    # NOTIFICATIONS
+    # ==========================
+    email_notifications = models.BooleanField(default=True)
+    sms_notifications = models.BooleanField(default=False)
+    push_notifications = models.BooleanField(default=True)
 
-    private_incidents = models.BooleanField(
-        default=True
-    )
+    # ==========================
+    # SECURITY
+    # ==========================
+    two_factor_auth = models.BooleanField(default=False)
 
-    two_factor_auth = models.BooleanField(
-        default=False
-    )
+    # ==========================
+    # ACCOUNT SETTINGS
+    # ==========================
+    allow_data_download = models.BooleanField(default=True)
+    allow_account_deletion = models.BooleanField(default=True)
 
-    # Notifications
-    email_notifications = models.BooleanField(
-        default=True
-    )
-
-    sms_notifications = models.BooleanField(
-        default=False
-    )
-
-    push_notifications = models.BooleanField(
-        default=True
-    )
-
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.user.username} Settings"
 
-analyst_comment = models.TextField(
-    blank=True,
-    null=True
-)
+
+
+

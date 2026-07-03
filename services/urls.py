@@ -18,6 +18,13 @@ urlpatterns = [
     ),
 
     path(
+        "services/",
+        views.services,
+        name="services"
+    ),
+
+
+    path(
         "tickets/",
         views.tickets,
         name="tickets"

@@ -1,37 +1,54 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.contrib.auth import login
+
 from .forms import CustomUserCreationForm
+from .models import Profile
 
 
+# ==========================
+# REGISTER
+# ==========================
 def register_view(request):
 
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
 
         if form.is_valid():
+
             user = form.save(commit=False)
 
-            # save full name properly
-            full_name = form.cleaned_data.get("full_name")
-            user.first_name = full_name
+            user.first_name = form.cleaned_data.get("full_name")
+            user.email = form.cleaned_data.get("email")
 
             user.save()
 
+            # Create profile automatically
+            Profile.objects.create(
+                user=user,
+                role="USER"
+            )
+
             login(request, user)
-            return redirect("dashboard")
+
+            return redirect("user_dashboard")
+
     else:
         form = CustomUserCreationForm()
 
-    return render(request, "accounts/register.html", {
-        "form": form
-    })
+    return render(
+        request,
+        "accounts/register.html",
+        {
+            "form": form
+        }
+    )
 
 
+# ==========================
+# LOGIN
+# ==========================
 def login_view(request):
 
     if request.method == "POST":
@@ -46,23 +63,94 @@ def login_view(request):
         )
 
         if user is not None:
+
             login(request, user)
-            return redirect("dashboard")
 
-        else:
-            messages.error(request, "Invalid username or password.")
+            return redirect("user_dashboard")
 
-    return render(request, "accounts/login.html")
+        messages.error(
+            request,
+            "Invalid username or password."
+        )
+
+    return render(
+        request,
+        "accounts/login.html"
+    )
 
 
+# ==========================
+# LOGOUT
+# ==========================
 def logout_view(request):
+
     logout(request)
+
     return redirect("home")
 
 
-@login_required
+# ==========================
+# PROFILE
+# ==========================
+login_required
 def profile(request):
-    return render(request, "accounts/profile.html")
 
+    profile = request.user.profile
+
+    if request.method == "POST":
+
+        user = request.user
+
+        user.first_name = request.POST.get("first_name")
+        user.last_name = request.POST.get("last_name")
+        user.email = request.POST.get("email")
+
+        profile.phone = request.POST.get("phone")
+        profile.address = request.POST.get("address")
+        profile.county = request.POST.get("county")
+
+        if request.FILES.get("profile_picture"):
+            profile.profile_picture = request.FILES["profile_picture"]
+
+        user.save()
+        profile.save()
+
+        messages.success(
+            request,
+            "Profile updated successfully."
+        )
+
+        return redirect("profile")
+
+    return render(
+        request,
+        "accounts/profile.html",
+        {
+            "profile": profile
+        }
+    )
+
+
+# ==========================
+# ABOUT
+# ==========================
 def about(request):
-    return render(request, "accounts/about.html")
+
+    return render(
+        request,
+        "accounts/about.html"
+    )
+
+def work(request):
+
+    return render(
+        request,
+        "accounts/work.html"
+    )
+
+def contact(request):
+
+    return render(
+        request,
+        "accounts/contact.html"
+    )

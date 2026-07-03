@@ -1,97 +1,88 @@
-{% extends 'base.html' %}
 {% load static %}
 
-{% block title %}About Us{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | CyberShield</title>
 
-{% block content %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+</head>
 
-<div class="container py-5">
+<body>
 
-    <div class="text-center mb-5">
-        <h1 class="fw-bold">About Our Writing Platform</h1>
-        <p class="text-muted">
-            A place where creativity, ideas, and stories come to life.
+<section class="about-container">
+
+    <h1>🛡 About CyberShield</h1>
+
+    <p class="intro">
+        CyberShield is a modern cybersecurity management system designed to help
+        users detect, report, and resolve cyber threats in a fast and organized way.
+    </p>
+
+    <div class="about-grid">
+
+        <div class="card">
+            <h2>🎯 Our Mission</h2>
+            <p>
+                To protect users and organizations from cyber threats by providing
+                a centralized platform for reporting incidents, managing tickets,
+                and ensuring fast response from cybersecurity analysts.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>⚙ What We Do</h2>
+            <p>
+                CyberShield allows users to report incidents like phishing,
+                malware, ransomware, and vulnerabilities. The system automatically
+                categorizes and prioritizes each case for faster response.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>🧠 AI-Powered Analysis</h2>
+            <p>
+                Our system uses intelligent logic to analyze reports, detect threats,
+                and provide instant recommendations to users before analysts review them.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>👨‍💻 Cybersecurity Analysts</h2>
+            <p>
+                Skilled analysts investigate reports, monitor threats, and provide
+                professional solutions to ensure systems remain secure.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>🔒 Security First Approach</h2>
+            <p>
+                We prioritize privacy, data protection, and secure communication
+                between users and analysts at every stage.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>🚀 Our Vision</h2>
+            <p>
+                To become a leading cybersecurity platform that empowers individuals
+                and organizations to stay safe in the digital world.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer-note">
+        <p>
+            CyberShield is built to bring together technology, security, and intelligence
+            to fight modern cyber threats.
         </p>
     </div>
 
-    <div class="row align-items-center">
+</section>
 
-        <div class="col-lg-6 mb-4">
-            <img src="{% static 'images/about-writing.jpg' %}" class="img-fluid rounded shadow" alt="Writing Platform">
-        </div>
-
-        <div class="col-lg-6">
-
-            <h3 class="fw-bold mb-3">Who We Are</h3>
-
-            <p class="text-muted">
-                Our Writing Platform is designed to empower writers by providing
-                an easy and accessible space to create, publish, and share
-                original content with readers across the world.
-            </p>
-
-            <p class="text-muted">
-                Whether you're an aspiring writer, blogger, student, researcher,
-                or experienced author, our platform helps you showcase your
-                knowledge, creativity, and unique perspective.
-            </p>
-
-            <h4 class="fw-bold mt-4">Our Mission</h4>
-
-            <p class="text-muted">
-                To inspire creativity, encourage knowledge sharing, and build a
-                community where every writer has the opportunity to be heard.
-            </p>
-
-        </div>
-
-    </div>
-
-    <hr class="my-5">
-
-    <div class="row text-center">
-
-        <div class="col-md-4 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <h2>✍️</h2>
-                    <h5>Create</h5>
-                    <p class="text-muted">
-                        Write and publish articles, blogs, stories, poems, and
-                        educational content.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <h2>📚</h2>
-                    <h5>Discover</h5>
-                    <p class="text-muted">
-                        Read inspiring articles and explore ideas from writers
-                        across different fields.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <h2>🌍</h2>
-                    <h5>Connect</h5>
-                    <p class="text-muted">
-                        Join a growing community that values creativity,
-                        knowledge, and meaningful conversations.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-{% endblock %}
+</body>
+</html>

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Ticket Details</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="card p-4 shadow">
+
+        <h3>{{ ticket.subject }}</h3>
+
+        <p><strong>Submitted By:</strong> {{ ticket.user.username }}</p>
+
+        <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+
+        <p><strong>Current Status:</strong> {{ ticket.status }}</p>
+
+        <p><strong>Date Submitted:</strong> {{ ticket.created_at }}</p>
+
+        <hr>
+
+        <h5>Message</h5>
+
+        <p>{{ ticket.message }}</p>
+
+        <hr>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label><strong>Update Status</strong></label>
+
+                <select name="status" class="form-control">
+
+                    <option value="Open"
+                        {% if ticket.status == "Open" %}selected{% endif %}>
+                        Open
+                    </option>
+
+                    <option value="In Progress"
+                        {% if ticket.status == "In Progress" %}selected{% endif %}>
+                        In Progress
+                    </option>
+
+                    <option value="Closed"
+                        {% if ticket.status == "Closed" %}selected{% endif %}>
+                        Closed
+                    </option>
+
+                </select>
+            </div>
+
+            <button class="btn btn-primary" type="submit">
+                Update Ticket
+            </button>
+
+            <a href="{% url 'professional_tickets' %}" class="btn btn-secondary">
+                Back
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

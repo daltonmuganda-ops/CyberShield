@@ -1,13 +1,14 @@
 from django.contrib import admin
 from .models import (
-    ServiceRequest,
+    Services,
     Incident,
     Ticket,
+    TicketMessage,
     SecurityReport,
-    UserSettings
+    UserSettings,
 )
 
-admin.site.register(ServiceRequest)
+admin.site.register(Services)
 admin.site.register(Incident)
 admin.site.register(Ticket)
 admin.site.register(SecurityReport)

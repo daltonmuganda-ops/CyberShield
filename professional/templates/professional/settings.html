@@ -32,31 +32,31 @@
 
             <li>
                 <a href="{% url 'professional_incidents' %}">
-                    ⚠ Incident Management
+                    🚨 Incident Management
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="{% url 'professional_request_service' %}">
                     🛠 Service Requests
                 </a>
             </li>
 
             <li>
-                <a href="#">
-                    🎫 Support Tickets
+                <a href="{% url 'professional_ticket' %}">
+                    🎫 Tickets
                 </a>
             </li>
 
             <li>
-                <a href="{% url 'professional_reports' %}">
-                    📄 Investigation Reports
+                <a href="{% url 'report' %}">
+                    📈 Reports & Analytics
                 </a>
             </li>
 
             <li>
-                <a href="#">
-                    👥 Users
+                <a href="/admin/auth/user/">
+                    👥 User Management
                 </a>
             </li>
 
@@ -68,13 +68,13 @@
 
             <li>
                 <a href="{% url 'professional_profile' %}">
-                    👤 Profile
+                    👤 My Profile
                 </a>
             </li>
 
             <li class="active">
                 <a href="{% url 'professional_settings' %}">
-                    ⚙ Settings
+                    ⚙️ Settings
                 </a>
             </li>
 

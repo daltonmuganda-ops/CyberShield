@@ -3,18 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 
+from .ai import analyze_ticket
 from .models import (
-    ServiceRequest,
+   Services,
     Incident,
     Ticket,
+    TicketMessage,
     SecurityReport,
 )
-
-
-# =====================================
-# SERVICES HOME
-# =====================================
-
 @login_required
 def services(request):
 
@@ -24,16 +20,14 @@ def services(request):
     )
 
 
-# =====================================
-# SERVICE REQUESTS
-# =====================================
-
 @login_required
 def request_service(request):
 
+    service = request.GET.get("service")
+
     if request.method == "POST":
 
-        ServiceRequest.objects.create(
+        Services.objects.create(
             user=request.user,
             service_name=request.POST.get("service_name"),
             description=request.POST.get("description"),
@@ -44,19 +38,24 @@ def request_service(request):
             "Service request submitted successfully."
         )
 
-        return redirect("request_service")
-
-    requests = ServiceRequest.objects.filter(
-        user=request.user
-    ).order_by("-created_at")
+        return redirect("services")
 
     return render(
         request,
         "services/request_service.html",
         {
-            "requests": requests
+            "service": service,
         }
     )
+
+from django.http import HttpResponse
+
+@login_required
+def professional_services(request):
+    return HttpResponse("THIS IS THE PROFESSIONAL SERVICES PAGE")
+
+
+
 
 
 # =====================================
@@ -72,7 +71,7 @@ def incident_report(request):
             user=request.user,
             title=request.POST.get("title"),
             attack_type=request.POST.get("attack_type"),
-            statement=request.POST.get("statement"),
+            description=request.POST.get("description"),
             evidence=request.FILES.get("evidence"),
         )
 
@@ -95,6 +94,22 @@ def incident_report(request):
         }
     )
 
+def create_ticket(request):
+    ticket = Ticket.objects.create(
+        user=request.user,
+        subject=request.POST['subject'],
+        message=request.POST['message']
+    )
+
+    analysis = analyze_ticket(ticket.message)
+
+    ticket.priority = analysis["priority"]
+    ticket.category = analysis["category"]
+    ticket.ai_summary = analysis["reply"]
+    ticket.save()
+
+    return redirect("dashboard")
+
 
 # =====================================
 # TICKETS
@@ -116,27 +131,27 @@ def tickets(request):
     )
 
 
+
+
 @login_required
-def create_ticket(request):
+def ticket_detail(request, pk):
 
-    if request.method == "POST":
+    ticket = Ticket.objects.get(
+        id=pk,
+        user=request.user
+    )
 
-        Ticket.objects.create(
-            user=request.user,
-            subject=request.POST.get("subject"),
-            message=request.POST.get("message"),
-        )
-
-        messages.success(
-            request,
-            "Ticket created successfully."
-        )
-
-        return redirect("tickets")
+    conversation = ticket.messages.all().order_by(
+        "created_at"
+    )
 
     return render(
         request,
-        "services/create_ticket.html"
+        "services/ticket_detail.html",
+        {
+            "ticket": ticket,
+            "conversation": conversation,
+        }
     )
 
 

@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | CyberShield</title>
+
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+</head>
+
+<body>
+
+<section class="contact-container">
+
+    <h1>📩 Contact CyberShield</h1>
+
+    <p class="intro">
+        Have a question, need support, or want to report a cybersecurity issue?
+        Reach out to us and our team will respond as soon as possible.
+    </p>
+
+    <div class="contact-grid">
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+
+            <h2>Send a Message</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Enter your name" required>
+
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Enter your email" required>
+
+                <label>Subject</label>
+                <input type="text" name="subject" placeholder="Message subject" required>
+
+                <label>Message</label>
+                <textarea name="message" rows="5" placeholder="Write your message..." required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+
+            <h2>📍 Get In Touch</h2>
+
+            <p><strong>Email:</strong> support@cybershield.com</p>
+            <p><strong>Phone:</strong> +254 700 000 000</p>
+            <p><strong>Location:</strong> Kenya</p>
+
+            <hr>
+
+            <h3>🛡 Response Time</h3>
+            <p>We usually respond within 24 hours for all security-related issues.</p>
+
+            <hr>
+
+            <h3>⚠ Emergency</h3>
+            <p>
+                For urgent cyber incidents, please use the incident reporting system
+                inside your dashboard for faster response.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

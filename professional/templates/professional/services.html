@@ -1,0 +1,129 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigation Reports | CyberShield Analyst</title>
+
+    <link rel="stylesheet" href="{% static 'css/professional.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🛡 CyberShield</h2>
+            <span>Analyst Portal</span>
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="{% url 'professional_dashboard' %}">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_incidents' %}">
+                    🚨 Incident Management
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'professional_services' %}">
+                    🛠 Service Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_tickets' %}">
+                    🎫 Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'report' %}">
+                    📈 Reports & Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/auth/user/">
+                    👥 User Management
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_notifications' %}">
+                    🔔 Notifications
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_profile' %}">
+                    👤 My Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'professional_settings' %}">
+                    ⚙️ Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    🚪 Logout
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+{% block content %}
+<main class="main-content">
+<h2>🛠 Service Requests</h2>
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Service No.</th>
+            <th>User</th>
+            <th>Service</th>
+            <th>Status</th>
+            <th>Analyst</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for service in services %}
+        <tr>
+            <td>{{ service.service_number }}</td>
+            <td>{{ service.user.username }}</td>
+            <td>{{ service.service_name }}</td>
+            <td>{{ service.status }}</td>
+            <td>
+                {% if service.analyst %}
+                    {{ service.analyst.username }}
+                {% else %}
+                    Unassigned
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No service requests available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</main>
+
+{% endblock %}

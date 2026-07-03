@@ -9,7 +9,7 @@
 
     <!-- Global CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    
     <!-- Page-specific CSS -->
     {% block extra_css %}{% endblock %}
 </head>
@@ -22,8 +22,8 @@
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="{% url 'about' %}">About</a>
-            <a href="{% url 'services' %}">Services</a>
-            <a href="/">Contact</a>
+            <a href="{% url 'work' %}">how we work</a>
+            <a href="{% url 'contact' %}">Contact</a>
         </div>
     </nav>
 
@@ -34,6 +34,56 @@
     <script src="{% static 'js/script.js' %}"></script>
 
     {% block extra_js %}{% endblock %}
+
+<footer class="cyber-footer">
+
+    <div class="footer-container">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+            <h2>🛡 CyberShield</h2>
+            <p>
+                A cybersecurity platform for reporting, tracking, and resolving digital threats
+                in real time.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+
+            <a href="{% url 'user_dashboard' %}">Dashboard</a>
+            <a href="{% url 'services' %}">Services</a>
+            <a href="{% url 'request_service' %}">My Requests</a>
+            <a href="{% url 'incident' %}">Incidents</a>
+            <a href="{% url 'tickets' %}">Tickets</a>
+        </div>
+
+        <!-- Support -->
+        <div class="footer-support">
+            <h3>Support</h3>
+
+            <a href="{% url 'contact' %}">Contact Us</a>
+            <a href="{% url 'settings' %}">Settings</a>
+            <a href="{% url 'profile' %}">Profile</a>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact">
+            <h3>Contact</h3>
+
+            <p>Email: support@cybershield.com</p>
+            <p>Phone: +254 700 000 000</p>
+            <p>Location: Kenya</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 CyberShield. All rights reserved.</p>
+    </div>
+
+</footer>
 
 
 </body>

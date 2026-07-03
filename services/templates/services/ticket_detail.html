@@ -1,0 +1,40 @@
+<h2>{{ ticket.subject }}</h2>
+
+<p>
+Status:
+<strong>{{ ticket.status }}</strong>
+</p>
+
+<p>
+Priority:
+<strong>{{ ticket.priority }}</strong>
+</p>
+
+<p>
+Category:
+<strong>{{ ticket.category }}</strong>
+</p>
+
+<hr>
+
+{% for msg in conversation %}
+
+<div style="padding:15px;margin-bottom:15px;border:1px solid #ddd;">
+
+{% if msg.is_ai %}
+
+<h4>CyberShield AI</h4>
+
+{% else %}
+
+<h4>{{ msg.sender.username }}</h4>
+
+{% endif %}
+
+<p>{{ msg.message }}</p>
+
+<small>{{ msg.created_at }}</small>
+
+</div>
+
+{% endfor %}

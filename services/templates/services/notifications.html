@@ -13,7 +13,7 @@
 
     <ul class="sidebar-menu">
         <li>
-            <a href="{% url 'dashboard' %}">
+            <a href="{% url 'user_dashboard' %}">
                 📊 Dashboard
             </a>
         </li>
@@ -66,6 +66,13 @@
                 ⚙ Settings
             </a>
         </li>
+        {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
+        <li>
+            <a href="{% url 'professional_dashboard' %}">
+                🛡 Professional Portal
+            </a>
+        </li>
+        {% endif %}
 
         <li>
             <a href="{% url 'logout' %}">

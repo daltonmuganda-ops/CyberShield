@@ -18,7 +18,7 @@
 
         <ul class="sidebar-menu">
             <li class="active">
-                <a href="{% url 'dashboard' %}">
+                <a href="{% url 'user_dashboard' %}">
                     📊 Dashboard
                 </a>
             </li>
@@ -71,6 +71,13 @@
                     ⚙ Settings
                 </a>
             </li>
+            {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
+            <li>
+                <a href="{% url 'professional_dashboard' %}">
+                    🛡 Professional Portal
+                </a>
+            </li>
+            {% endif %}
 
             <li>
                 <a href="{% url 'logout' %}">
@@ -91,8 +98,8 @@
             <h1>Dashboard</h1>
 
             <div class="user">
-                Welcome,
-                <strong>{{ request.user.username }}</strong>
+                <strong>User:</strong> {{ request.user.username }}<br>
+                <strong>Role:</strong> {{ request.user.settings.role }}
             </div>
 
         </header>
@@ -255,5 +262,7 @@
     </main>
 
 </div>
+
+
 
 {% endblock %}
