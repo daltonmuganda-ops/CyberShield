@@ -22,36 +22,30 @@
 
     <ul class="sidebar-menu">
 
-        <li><a href="{% url 'user_dashboard' %}">📊 Dashboard</a></li>
+        <li><a href="{% url 'user_dashboard' %}"> Dashboard</a></li>
 
-        <li><a href="{% url 'services' %}">🛠 Services</a></li>
+        <li><a href="{% url 'services' %}"> Services</a></li>
 
-        <li><a href="{% url 'request_service' %}">📋 My Requests</a></li>
+        <li><a href="{% url 'request_service' %}"> My Requests</a></li>
 
-        <li><a href="{% url 'incident' %}">⚠ Incidents</a></li>
+        <li><a href="{% url 'incident' %}"> Incidents</a></li>
 
-        <li><a href="{% url 'tickets' %}">🎫 Tickets</a></li>
+        <li><a href="{% url 'tickets' %}"> Tickets</a></li>
 
-        <li><a href="{% url 'reports' %}">📄 Reports</a></li>
+        <li><a href="{% url 'reports' %}"> Reports</a></li>
 
-        <li><a href="{% url 'notifications' %}">🔔 Notifications</a></li>
+        <li><a href="{% url 'notifications' %}"> Notifications</a></li>
 
         <li><a href="{% url 'account' %}">Account</a></li>
 
         <hr>
 
-        <li><a href="{% url 'profile' %}">👤 Profile</a></li>
+        <li><a href="{% url 'profile' %}"> Profile</a></li>
 
-        <li class="active"><a href="{% url 'settings' %}">⚙ Settings</a></li>
-    {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
-        <li>
-            <a href="{% url 'professional_dashboard' %}">
-                🛡 Professional Portal
-            </a>
-        </li>
-        {% endif %}
+        <li class="active"><a href="{% url 'settings' %}">Settings</a></li>
+    
 
-        <li><a href="{% url 'logout' %}">🚪 Logout</a></li>
+        <li><a href="{% url 'logout' %}"> Logout</a></li>
 
     </ul>
 
@@ -62,7 +56,7 @@
 
     <div class="account-container">
 
-        <h1>⚙️ Account Settings</h1>
+        <h1> Account Settings</h1>
 
         <p class="subtitle">
             Manage your CyberShield account and personal data.
@@ -70,7 +64,7 @@
 
         <div class="account-card">
 
-            <h2>📥 Download Your Data</h2>
+            <h2>Download Your Data</h2>
 
             <p>
                 Download a copy of your reports, tickets, requests and account
@@ -85,7 +79,7 @@
 
         <div class="account-card">
 
-            <h2>🚪 Logout</h2>
+            <h2>Logout</h2>
 
             <p>
                 Sign out securely from your CyberShield account.

@@ -14,42 +14,42 @@
     <ul class="sidebar-menu">
         <li>
             <a href="{% url 'user_dashboard' %}">
-                📊 Dashboard
+                 Dashboard
             </a>
         </li>
 
         <li >
-            <a href="{% url 'services' %}"> 🛠 Services
+            <a href="{% url 'services' %}">  Services
             </a>
         </li>
 
         <li>
             <a href="{% url 'request_service' %} ">
-                📋 My Requests
+                  Request Services
             </a>
         </li>
 
         <li>
             <a href="{% url 'incident' %}">
-                ⚠ Incidents
+                 Incidents
             </a>
         </li>
 
         <li>
            <a href="{% url 'tickets' %}">
-                🎫 Tickets
+                 Tickets
             </a>
         </li>
 
         <li>
             <a href="{% url 'reports' %}">
-                📄 Reports
+                 Reports
             </a>
         </li>
 
         <li class="active">
             <a href="{% url 'notifications' %}">
-                🔔 Notifications
+                 Notifications
             </a>
         </li>
 
@@ -57,26 +57,20 @@
 
         <li>
             <a href="{% url 'profile' %}">
-                👤 Profile
+                 Profile
             </a>
         </li>
 
         <li>
             <a href="{% url 'settings' %}">
-                ⚙ Settings
+                 Settings
             </a>
         </li>
-        {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
-        <li>
-            <a href="{% url 'professional_dashboard' %}">
-                🛡 Professional Portal
-            </a>
-        </li>
-        {% endif %}
+        
 
         <li>
             <a href="{% url 'logout' %}">
-                🚪 Logout
+                 Logout
             </a>
         </li>
 
@@ -99,30 +93,30 @@
 <main class="main-content">
 <div class="notification-container">
 
-    <h1>🔔 Notifications</h1>
+    <h1> Notifications</h1>
 
     <div class="notification-card">
 
         <div class="notification-item">
-            <h3>🛡 Security Alert</h3>
+            <h3> Security Alert</h3>
             <p>A new login was detected from your account.</p>
             <span>Today • 10:35 AM</span>
         </div>
 
         <div class="notification-item">
-            <h3>🎫 Ticket Updated</h3>
+            <h3> Ticket Updated</h3>
             <p>Your support ticket has been updated.</p>
             <span>Yesterday • 3:45 PM</span>
         </div>
 
         <div class="notification-item">
-            <h3>⚠ Incident Report</h3>
+            <h3> Incident Report</h3>
             <p>Your incident report has been reviewed.</p>
             <span>2 days ago</span>
         </div>
 
         <div class="notification-item">
-            <h3>📢 System Update</h3>
+            <h3> System Update</h3>
             <p>CyberShield security improvements have been deployed.</p>
             <span>Last Week</span>
         </div>

@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="{% static 'css/services.css' %}">
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 <aside class="sidebar">
 
         <div class="logo">
@@ -15,47 +15,42 @@
         <ul class="sidebar-menu">
             <li>
                 <a href="{% url 'user_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li class="active">
-                <a href="#"> 🛠 Services
+                <a href="#">  Services
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'request_service' %} ">
-                    📋 Requests services
+                     Request Services
                 </a>
             </li>
-            <li>
-                <a href="{% url 'request_service' %} ">
-                    📋 My Requests
-                </a>
-            <li>
-
+           
             <li>
                 <a href="{% url 'incident' %}">
-                    ⚠ Incidents
+                     Incidents
                 </a>
             </li>
 
             <li>
                <a href="{% url 'tickets' %}">
-                    🎫 Tickets
+                     Tickets
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'reports' %}">
-                    📄 Reports
+                     Reports
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'notifications'%}">
-                    🔔 Notifications
+                     Notifications
                 </a>
             </li>
 
@@ -63,26 +58,20 @@
 
             <li>
                 <a href="{% url 'profile' %}">
-                    👤 Profile
+                     Profile
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'settings' %}">
-                    ⚙ Settings
+                     Settings
                 </a>
             </li>
-            {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
-            <li>
-                <a href="{% url 'professional_dashboard' %}">
-                    🛡 Professional Portal
-                </a>
-            </li>
-            {% endif %}
+            
 
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -106,15 +95,15 @@
 
         <!-- Card 1 -->
         <div class="service-card">
-            <div class="icon">🛡️</div>
+            
             <h3>Vulnerability Assessment</h3>
             <p>Identify security weaknesses in your systems before attackers do.</p>
             <a href="{% url 'request_service' %}?service=Vulnerability Assessmen" class="btn">Request Service</a>
+            
         </div>
 
         <!-- Card 2 -->
         <div class="service-card">
-            <div class="icon">🎯</div>
             <h3>Penetration Testing</h3>
             <p>Simulated cyber attacks to test your system security strength.</p>
             <a href="{% url 'request_service' %}?service=Penetration Testing" class="btn">Request Service</a>
@@ -122,7 +111,6 @@
 
         <!-- Card 3 -->
         <div class="service-card">
-            <div class="icon">🌐</div>
             <h3>Network Security Audit</h3>
             <p>Deep analysis of your network infrastructure and risks.</p>
             <a href="{% url 'request_service' %}?service=Network Security Audit" class="btn">Request Service</a>
@@ -130,7 +118,6 @@
 
         <!-- Card 4 -->
         <div class="service-card">
-            <div class="icon">🚨</div>
             <h3>Incident Response</h3>
             <p>Fast response team for cyber attacks and breaches.</p>
             <a href="{% url 'request_service' %}?service=Incident Response" class="btn">Request Service</a>
@@ -138,7 +125,6 @@
 
         <!-- Card 5 -->
         <div class="service-card">
-            <div class="icon">🎓</div>
             <h3>Security Awareness Training</h3>
             <p>Train employees to avoid cyber threats and phishing attacks.</p>
             <a href="{% url 'request_service' %}?service=Security Awareness Training" class="btn">Request Service</a>
@@ -146,11 +132,24 @@
 
         <!-- Card 6 -->
         <div class="service-card">
-            <div class="icon">💻</div>
             <h3>Web Application Security</h3>
             <p>Secure your websites and web apps from hackers.</p>
             <a href="{% url 'request_service' %}?service=Web Application Security" class="btn">Request Service</a>
         </div>
+
+        <div class="service-card">
+            <h3>Social Engineering Assessment</h3>
+            <p> Receive detailed findings and recommendations to improve
+        security awareness.</p>
+            <a href="{% url 'request_service' %}?service=Web Application Security" class="btn">Request Service</a>
+        </div>
+        
+        <div class="service-card">
+            <h3>Others Assessment</h3>
+            <p> improve security awareness.</p>
+            <a href="{% url 'request_service' %}?service=Web Application Security" class="btn">Request Service</a>
+        </div>
+
 
         
     </div>

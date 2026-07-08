@@ -9,6 +9,10 @@
 
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'css/appearance.css' %}">
+    {% if request.user.settings.theme == "dark" %}
+    <link rel="stylesheet" href="{% static 'css/dark.css' %}">
+    {% endif %}
+
 </head>
 
 <body>
@@ -22,29 +26,29 @@
 
     <ul class="sidebar-menu">
 
-        <li><a href="{% url 'user_dashboard' %}">📊 Dashboard</a></li>
+        <li><a href="{% url 'user_dashboard' %}">Dashboard</a></li>
 
-        <li><a href="{% url 'services' %}">🛠 Services</a></li>
+        <li><a href="{% url 'services' %}"> Services</a></li>
 
-        <li><a href="{% url 'request_service' %}">📋 My Requests</a></li>
+        <li><a href="{% url 'request_service' %}"> Request Services</a></li>
 
-        <li><a href="{% url 'incident' %}">⚠ Incidents</a></li>
+        <li><a href="{% url 'incident' %}">⚠Incidents</a></li>
 
-        <li><a href="{% url 'tickets' %}">🎫 Tickets</a></li>
+        <li><a href="{% url 'tickets' %}"> Tickets</a></li>
 
-        <li><a href="{% url 'reports' %}">📄 Reports</a></li>
+        <li><a href="{% url 'reports' %}"> Reports</a></li>
 
-        <li><a href="{% url 'notifications' %}">🔔 Notifications</a></li>
+        <li><a href="{% url 'notifications' %}"> Notifications</a></li>
 
         <hr>
 
-        <li><a href="{% url 'profile' %}">👤 Profile</a></li>
+        <li><a href="{% url 'profile' %}"> Profile</a></li>
 
         <li class="active">
-            <a href="{% url 'settings' %}">⚙ Settings</a>
+            <a href="{% url 'settings' %}"> Settings</a>
         </li>
 
-        <li><a href="{% url 'logout' %}">🚪 Logout</a></li>
+        <li><a href="{% url 'logout' %}"> Logout</a></li>
 
     </ul>
 
@@ -55,72 +59,96 @@
 
 <div class="appearance-container">
 
-    <h1>🎨 Appearance Settings</h1>
+    <h1> Appearance Settings</h1>
 
     <p class="subtitle">
         Customize the look and feel of CyberShield.
     </p>
 
     <div class="appearance-card">
+        <form method="POST">
 
-        <h3>Choose Theme</h3>
+            {% csrf_token %}
 
-        <form>
-
-            <label>
-                <input type="radio" name="theme" checked>
-                ☀️ Light Mode
-            </label>
-
-            <br><br>
+            <h3>Choose Theme</h3>
 
             <label>
-                <input type="radio" name="theme">
-                🌙 Dark Mode
-            </label>
+            <input
+                type="radio"
+                name="theme"
+                value="light"
+                {% if request.user.settings.theme == "light" %}checked{% endif %}
+            >
+            Light Mode
+        </label>
 
-            <br><br>
+        <br><br>
 
-            <label>
-                <input type="radio" name="theme">
-                💻 System Default
-            </label>
+        <label>
+            <input
+                type="radio"
+                name="theme"
+                value="dark"
+                {% if request.user.settings.theme == "dark" %}checked{% endif %}
+            >
+             Dark Mode
+        </label>
 
-        </form>
+        <br><br>
 
-    </div>
+        <label>
+            <input
+                type="radio"
+                name="theme"
+                value="system"
+                {% if request.user.settings.theme == "system" %}checked{% endif %}
+            >
+             System Default
+        </label>
 
-    <div class="appearance-card">
+        <br><br>
 
         <h3>Font Size</h3>
 
-        <select>
+        <select name="font_size">
 
-            <option>Small</option>
+            <option value="small"
+            {% if request.user.settings.font_size == "small" %}selected{% endif %}>
+            Small
+            </option>
 
-            <option selected>Medium</option>
+            <option value="medium"
+            {% if request.user.settings.font_size == "medium" %}selected{% endif %}>
+            Medium
+            </option>
 
-            <option>Large</option>
+            <option value="large"
+            {% if request.user.settings.font_size == "large" %}selected{% endif %}>
+            Large
+            </option>
 
         </select>
 
-    </div>
-
-    <div class="appearance-card">
-
-        <h3>Dashboard Layout</h3>
+        <br><br>
 
         <label>
-            <input type="checkbox" checked>
+
+            <input
+                type="checkbox"
+                name="compact_layout"
+                {% if request.user.settings.compact_layout %}checked{% endif %}
+            >
+
             Enable Compact Layout
+
         </label>
 
-    </div>
+        <br><br>
 
-    <button class="save-btn">
-        💾 Save Appearance
-    </button>
-
+        <button class="save-btn">
+            Save Appearance
+        </button>
+    </form>    
 </div>
 
 </main>

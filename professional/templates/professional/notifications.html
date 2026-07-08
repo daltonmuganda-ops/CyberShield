@@ -21,68 +21,63 @@
 
         <div class="logo">
             <h2>🛡 CyberShield</h2>
-            <span>Analyst Portal</span>
+            <p>Analyst Portal</p>
         </div>
 
         <ul class="sidebar-menu">
 
-            <li class="active">
+            <li>
                 <a href="{% url 'professional_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_incidents' %}">
-                    🚨 Incident Management
+                     Incident Management
                 </a>
             </li>
             
             <li>
                 <a href="{% url 'professional_services' %}">
-                    🛠 Service Requests
+                     Service Requests
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_tickets' %}">
-                    🎫 Tickets
+                     Tickets
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'report' %}">
-                    📈 Reports & Analytics
+                     Reports & Analytics
                 </a>
             </li>
 
             <li>
                 <a href="/admin/auth/user/">
-                    👥 User Management
+                     User Management
                 </a>
             </li>
 
             <li class="active">
                 <a href="{% url 'professional_notifications' %}">
-                    🔔 Notifications
+                     Notifications
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'user_dashboard' %}">
+                     user Dashboard
                 </a>
             </li>
 
-            <li>
-                <a href="{% url 'professional_profile' %}">
-                    👤 My Profile
-                </a>
-            </li>
 
-            <li>
-                <a href="{% url 'professional_settings' %}">
-                    ⚙️ Settings
-                </a>
-            </li>
 
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -94,7 +89,7 @@
     <main class="main-content">
 
         <div class="page-header">
-            <h1>🔔 Notifications</h1>
+            <h1> Notifications</h1>
             <p>Recent alerts and activities requiring your attention.</p>
         </div>
 
@@ -108,15 +103,15 @@
 
                     <div class="notification-icon">
                         {% if notification.notification_type == "Incident" %}
-                            ⚠
+                            
                         {% elif notification.notification_type == "Ticket" %}
-                            🎫
+                            
                         {% elif notification.notification_type == "Report" %}
-                            📄
+                            
                         {% elif notification.notification_type == "Service" %}
-                            🛠
+                            
                         {% else %}
-                            🔔
+                            
                         {% endif %}
                     </div>
 

@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-
+from django.http import HttpResponse
+from .models import IncidentReport
 from .ai import analyze_ticket
 from .models import (
    Services,
@@ -27,17 +28,32 @@ def request_service(request):
 
     if request.method == "POST":
 
-        Services.objects.create(
+        service_request = Services.objects.create(
+             user=request.user,
+             service_name=request.POST.get("service_name"),
+             assistance_type=request.POST.get("assistance_type"),
+             client_type=request.POST.get("client_type"),
+             affected_device=request.POST.get("affected_device"),
+             location=request.POST.get("location"),
+             incident_days=request.POST.get("incident_days"),
+             description=request.POST.get("description"),
+             attachment=request.FILES.get("attachment"),
+        )
+        ai_result = analyze_ticket(service_request.description)
+
+        ticket = Ticket.objects.create(
             user=request.user,
-            service_name=request.POST.get("service_name"),
-            description=request.POST.get("description"),
+            subject=f"Service Request - {service_request.service_name}",
+            message=service_request.description,
+            priority=ai_result["priority"],
+            category=ai_result["category"],
+            ai_summary=ai_result["reply"],
         )
 
         messages.success(
             request,
-            "Service request submitted successfully."
+            f"Service request submitted successfully. Your Ticket Number is {ticket.ticket_number}."
         )
-
         return redirect("services")
 
     return render(
@@ -47,15 +63,6 @@ def request_service(request):
             "service": service,
         }
     )
-
-from django.http import HttpResponse
-
-@login_required
-def professional_services(request):
-    return HttpResponse("THIS IS THE PROFESSIONAL SERVICES PAGE")
-
-
-
 
 
 # =====================================
@@ -67,7 +74,8 @@ def incident_report(request):
 
     if request.method == "POST":
 
-        Incident.objects.create(
+        
+        incident = Incident.objects.create(
             user=request.user,
             title=request.POST.get("title"),
             attack_type=request.POST.get("attack_type"),
@@ -75,9 +83,21 @@ def incident_report(request):
             evidence=request.FILES.get("evidence"),
         )
 
+        # Automatically create a ticket
+        # Analyze the incident using AI
+        ai_result = analyze_ticket(incident.description)
+
+        ticket = Ticket.objects.create(
+            user=request.user,
+            subject=incident.title,
+            message=incident.description,
+            priority=ai_result["priority"],
+            category=ai_result["category"],
+            ai_summary=ai_result["reply"],
+        )
         messages.success(
             request,
-            "Incident reported successfully."
+            f"Incident reported successfully. Your Ticket Number is {ticket.ticket_number}."
         )
 
         return redirect("incident")
@@ -93,24 +113,6 @@ def incident_report(request):
             "incidents": incidents
         }
     )
-
-def create_ticket(request):
-    ticket = Ticket.objects.create(
-        user=request.user,
-        subject=request.POST['subject'],
-        message=request.POST['message']
-    )
-
-    analysis = analyze_ticket(ticket.message)
-
-    ticket.priority = analysis["priority"]
-    ticket.category = analysis["category"]
-    ticket.ai_summary = analysis["reply"]
-    ticket.save()
-
-    return redirect("dashboard")
-
-
 # =====================================
 # TICKETS
 # =====================================
@@ -162,8 +164,8 @@ def ticket_detail(request, pk):
 @login_required
 def reports(request):
 
-    reports = SecurityReport.objects.filter(
-        user=request.user
+    reports = IncidentReport.objects.filter(
+        incident__user=request.user
     ).order_by("-created_at")
 
     return render(
@@ -186,7 +188,7 @@ def profile(request):
         request,
         "services/profile.html",
         {
-            "user": request.user
+            "profile": request.user.profile,
         }
     )
 
@@ -194,30 +196,42 @@ def profile(request):
 @login_required
 def edit_profile(request):
 
+    profile = request.user.profile
+
     if request.method == "POST":
 
-        user = request.user
+        request.user.first_name = request.POST.get("first_name")
+        request.user.last_name = request.POST.get("last_name")
+        request.user.county = request.POST.get("county")
+        request.user.email = request.POST.get("email")
+        request.user.save()
 
-        user.username = request.POST.get("username")
-        user.first_name = request.POST.get("first_name")
-        user.last_name = request.POST.get("last_name")
-        user.email = request.POST.get("email")
+        profile.bio = request.POST.get("bio")
+        profile.phone = request.POST.get("phone")
+        profile.gender = request.POST.get("gender")
+        dob = request.POST.get("date_of_birth")
 
-        user.save()
+        if dob:
+            profile.date_of_birth = dob
+        else:
+            profile.date_of_birth = None
 
-        messages.success(
-            request,
-            "Profile updated successfully."
-        )
+        if request.FILES.get("profile_picture"):
+            profile.profile_picture = request.FILES["profile_picture"]
+
+        profile.save()
+
+        messages.success(request, "Profile updated successfully.")
 
         return redirect("profile")
 
     return render(
         request,
-        "services/edit_profile.html"
+        "services/edit_profile.html",
+        {
+            "profile": profile
+        }
     )
-
-
 # =====================================
 # CHANGE PASSWORD
 # =====================================
@@ -299,6 +313,27 @@ def settings(request):
 @login_required
 def appearance(request):
 
+    settings = request.user.settings
+
+    if request.method == "POST":
+
+        settings.theme = request.POST.get("theme")
+
+        settings.font_size = request.POST.get("font_size")
+
+        settings.compact_layout = (
+            "compact_layout" in request.POST
+        )
+
+        settings.save()
+
+        messages.success(
+            request,
+            "Appearance updated successfully."
+        )
+
+        return redirect("appearance")
+
     return render(
         request,
         "services/appearance.html"
@@ -307,6 +342,35 @@ def appearance(request):
 
 @login_required
 def privacy(request):
+
+    settings = request.user.settings
+
+    if request.method == "POST":
+
+        settings.email_visibility = (
+            "email_visibility" in request.POST
+        )
+
+        settings.activity_tracking = (
+            "activity_tracking" in request.POST
+        )
+
+        settings.private_profile = (
+            "private_profile" in request.POST
+        )
+
+        settings.two_factor_auth = (
+            "two_factor_auth" in request.POST
+        )
+
+        settings.save()
+
+        messages.success(
+            request,
+            "Privacy settings updated."
+        )
+
+        return redirect("privacy")
 
     return render(
         request,
@@ -332,3 +396,66 @@ def delete_account(request):
     )
 
     return redirect("account")
+
+@login_required
+def notify(request):
+
+    settings = request.user.settings
+
+    if request.method == "POST":
+
+        settings.email_notifications = (
+            "email_notifications" in request.POST
+        )
+
+        settings.sms_notifications = (
+            "sms_notifications" in request.POST
+        )
+
+        settings.push_notifications = (
+            "push_notifications" in request.POST
+        )
+
+        settings.save()
+
+        messages.success(
+            request,
+            "Notification settings updated successfully."
+        )
+
+        return redirect("notify")
+
+    return render(
+        request,
+        "services/notify.html"
+    )
+
+@login_required
+def download_report(request, pk):
+
+    report = get_object_or_404(
+        SecurityReport,
+        pk=pk,
+        analyst=request.user
+    )
+
+    response = HttpResponse(content_type="text/plain")
+
+    response["Content-Disposition"] = (
+        f'attachment; filename="{report.title}.txt"'
+    )
+
+    response.write("-------------------------------------\n")
+    response.write("      CYBERSHIELD SECURITY REPORT\n")
+    response.write("-------------------------------------\n\n")
+
+    response.write(f"Title : {report.title}\n")
+    response.write(f"User  : {request.user.get_full_name()}\n")
+    response.write(f"Date  : {report.created_at.strftime('%d %B %Y')}\n\n")
+
+    response.write("REPORT DETAILS\n")
+    response.write("-------------------------------------\n")
+
+    response.write(report.report)
+
+    return response

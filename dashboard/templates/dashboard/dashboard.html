@@ -19,42 +19,42 @@
         <ul class="sidebar-menu">
             <li class="active">
                 <a href="{% url 'user_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li>
-                <a href="{% url 'services' %}"> 🛠 Services
+                <a href="{% url 'services' %}">  Services
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'request_service' %} ">
-                    📋 My Requests
+                     Request Services
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'incident' %}">
-                    ⚠ Incidents
+                     Incidents
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'tickets' %}">
-                    🎫 Tickets
+                     Tickets
                 </a>
             </li>
 
             <li>
-                <a href="{% url 'settings' %}">
-                    📄 Reports
+                <a href="{% url 'reports' %}">
+                     Reports
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'notifications' %}">
-                    🔔 Notifications
+                     Notifications
                 </a>
             </li>
 
@@ -62,26 +62,20 @@
 
             <li>
                 <a href="{% url 'profile' %}">
-                    👤 Profile
+                     Profile
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'settings' %}">
-                    ⚙ Settings
+                     Settings
                 </a>
             </li>
-            {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
-            <li>
-                <a href="{% url 'professional_dashboard' %}">
-                    🛡 Professional Portal
-                </a>
-            </li>
-            {% endif %}
+            
 
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -98,8 +92,8 @@
             <h1>Dashboard</h1>
 
             <div class="user">
-                <strong>User:</strong> {{ request.user.username }}<br>
-                <strong>Role:</strong> {{ request.user.settings.role }}
+                Welcome {{ request.user.username }}<br>
+                
             </div>
 
         </header>
@@ -176,15 +170,15 @@
 
                 <div class="buttons">
 
-                    <a href="#" class="btn">
+                    <a href="{% url 'services' %}" class="btn">
                         Request Service
                     </a>
 
-                    <a href="#" class="btn danger">
+                    <a href="{% url 'incident' %}" class="btn danger">
                         Report Incident
                     </a>
 
-                    <a href="#" class="btn">
+                    <a href="{% url 'tickets' %}" class="btn">
                         Open Ticket
                     </a>
 

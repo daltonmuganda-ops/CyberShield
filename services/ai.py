@@ -7,7 +7,7 @@ def analyze_ticket(text):
             "priority": "High",
             "category": "Ransomware",
             "reply": (
-                "⚠ Possible ransomware detected.\n\n"
+                " Possible ransomware detected.\n\n"
                 "Disconnect the affected computer from the network immediately.\n"
                 "Do not pay the ransom.\n"
                 "Wait for a CyberShield analyst."
@@ -19,7 +19,7 @@ def analyze_ticket(text):
             "priority": "High",
             "category": "Phishing",
             "reply": (
-                "⚠ Possible phishing attack.\n\n"
+                " Possible phishing attack.\n\n"
                 "Avoid clicking any links.\n"
                 "Do not enter passwords.\n"
                 "Forward the suspicious email to our analysts."

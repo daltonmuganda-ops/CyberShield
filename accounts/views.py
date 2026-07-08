@@ -7,9 +7,7 @@ from .forms import CustomUserCreationForm
 from .models import Profile
 
 
-# ==========================
 # REGISTER
-# ==========================
 def register_view(request):
 
     if request.method == "POST":
@@ -24,11 +22,7 @@ def register_view(request):
 
             user.save()
 
-            # Create profile automatically
-            Profile.objects.create(
-                user=user,
-                role="USER"
-            )
+            
 
             login(request, user)
 
@@ -46,9 +40,7 @@ def register_view(request):
     )
 
 
-# ==========================
 # LOGIN
-# ==========================
 def login_view(request):
 
     if request.method == "POST":
@@ -79,9 +71,7 @@ def login_view(request):
     )
 
 
-# ==========================
 # LOGOUT
-# ==========================
 def logout_view(request):
 
     logout(request)
@@ -89,9 +79,7 @@ def logout_view(request):
     return redirect("home")
 
 
-# ==========================
 # PROFILE
-# ==========================
 login_required
 def profile(request):
 
@@ -131,9 +119,7 @@ def profile(request):
     )
 
 
-# ==========================
 # ABOUT
-# ==========================
 def about(request):
 
     return render(

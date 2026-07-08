@@ -16,7 +16,9 @@ urlpatterns = [
 
     # Reports
     path('reports/', views.report, name='report'),
+    path("incidents/<int:pk>/upload-report/", views.upload_investigation_report, name="upload_report"),
     path('reports/<int:id>/', views.report_details, name='report_details'),
+    path("reports/view/<int:pk>/", views.view_report, name="view_report"),
 
     # Requests
     path('request/', views.my_request, name='professional_request'),
@@ -34,4 +36,6 @@ urlpatterns = [
     "services/",
     views.professional_services,
     name="professional_services"),
+
+    
 ]

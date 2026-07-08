@@ -1,144 +1,294 @@
 /* ==========================
-   INSTAGRAM STYLE PROFILE
+   PROFILE PAGE
 ========================== */
 
-*{
+.main-content{
+    margin-left:260px;
+    padding:40px;
+    background:#f4f7fb;
+    min-height:100vh;
+}
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.profile-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+/* ==========================
+   CARD
+========================== */
+
+.profile-card{
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    overflow:hidden;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.top-section{
+
+    background:linear-gradient(135deg,#0f172a,#1d4ed8);
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:35px;
+
+    padding:45px;
+}
+
+/* ==========================
+   PHOTO
+========================== */
+
+.photo{
+
+    width:180px;
+
+    height:180px;
+
+    flex-shrink:0;
+}
+
+.profile-image{
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:6px solid rgba(255,255,255,.8);
+
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+
+    transition:.3s;
+}
+
+.profile-image:hover{
+
+    transform:scale(1.05);
+}
+
+/* ==========================
+   USER INFO
+========================== */
+
+.user-info h1{
+
     margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
 
-body{
-    background:#fafafa;
-}
+    font-size:34px;
 
-h2{
-    text-align:center;
-    margin:40px 0 30px;
-    color:#262626;
-    font-size:30px;
     font-weight:700;
 }
 
-form{
-    width:650px;
-    margin:0 auto 50px;
-    background:#fff;
-    border:1px solid #dbdbdb;
-    border-radius:12px;
-    padding:40px;
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
-}
+.role{
 
-/* Profile Picture */
+    display:inline-block;
 
-form div{
-    text-align:center;
-    margin-bottom:25px;
-}
+    margin-top:12px;
 
-form img{
-    width:160px;
-    height:160px;
-    border-radius:50%;
-    object-fit:cover;
-    border:5px solid #fff;
-    box-shadow:0 8px 20px rgba(0,0,0,.15);
-}
+    padding:7px 18px;
 
-/* Labels */
+    border-radius:25px;
 
-label{
-    display:block;
-    margin-bottom:8px;
-    margin-top:18px;
-    font-size:14px;
-    font-weight:600;
-    color:#262626;
-}
+    background:#10b981;
 
-/* Inputs */
-
-input[type="text"],
-input[type="email"],
-textarea{
-    width:100%;
-    padding:14px 18px;
-    border:1px solid #dbdbdb;
-    border-radius:8px;
-    font-size:15px;
-    background:#fafafa;
-    transition:.3s;
-}
-
-textarea{
-    resize:vertical;
-    min-height:120px;
-}
-
-input:focus,
-textarea:focus{
-    outline:none;
-    border-color:#0095f6;
-    background:#fff;
-    box-shadow:0 0 8px rgba(0,149,246,.15);
-}
-
-/* File Upload */
-
-input[type="file"]{
-    width:100%;
-    padding:12px;
-    border:1px dashed #ccc;
-    border-radius:8px;
-    background:#fafafa;
-    cursor:pointer;
-    transition:.3s;
-}
-
-input[type="file"]:hover{
-    border-color:#0095f6;
-}
-
-/* Button */
-
-button{
-    width:100%;
-    margin-top:35px;
-    padding:15px;
-    background:#0095f6;
     color:#fff;
-    border:none;
-    border-radius:8px;
-    font-size:16px;
+
     font-weight:600;
-    cursor:pointer;
+
+    font-size:14px;
+
+    text-transform:uppercase;
+}
+
+.bio{
+
+    margin-top:22px;
+
+    line-height:1.8;
+
+    max-width:650px;
+
+    font-size:16px;
+
+    opacity:.95;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.edit-btn{
+
+    display:inline-block;
+
+    margin-top:28px;
+
+    padding:12px 28px;
+
+    background:#ffffff;
+
+    color:#1d4ed8;
+
+    font-weight:700;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
     transition:.3s;
 }
 
-button:hover{
-    background:#1877f2;
+.edit-btn:hover{
+
+    background:#1d4ed8;
+
+    color:#fff;
+
     transform:translateY(-2px);
-    box-shadow:0 8px 18px rgba(0,149,246,.3);
 }
 
-/* Responsive */
+/* ==========================
+   DETAILS
+========================== */
 
-@media(max-width:768px){
+.details{
 
-    form{
-        width:95%;
-        padding:25px;
-    }
+    display:grid;
 
-    h2{
-        font-size:25px;
-    }
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 
-    form img{
-        width:120px;
-        height:120px;
-    }
+    gap:25px;
+
+    padding:35px;
+}
+
+/* ==========================
+   DETAIL BOX
+========================== */
+
+.detail-box{
+
+    background:#f8fafc;
+
+    border-left:5px solid #2563eb;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    transition:.3s;
+}
+
+.detail-box:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.detail-box strong{
+
+    display:block;
+
+    color:#64748b;
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+}
+
+.detail-box p{
+
+    margin:0;
+
+    color:#111827;
+
+    font-size:17px;
+
+    font-weight:600;
+}
+
+/* ==========================
+   HR
+========================== */
+
+.profile-card hr{
+
+    border:none;
+
+    border-top:1px solid #e5e7eb;
+
+    margin:0;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:900px){
+
+.top-section{
+
+    flex-direction:column;
+
+    text-align:center;
+}
+
+.bio{
+
+    max-width:100%;
+}
+
+.main-content{
+
+    margin-left:0;
+
+    padding:20px;
+}
+
+.profile-image{
+
+    width:150px;
+
+    height:150px;
+}
+
+.photo{
+
+    width:150px;
+
+    height:150px;
+}
+
+.user-info h1{
+
+    font-size:28px;
+}
+
+.details{
+
+    grid-template-columns:1fr;
+}
 
 }

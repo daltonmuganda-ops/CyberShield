@@ -16,11 +16,119 @@ class Services(models.Model):
         ("Rejected", "Rejected"),
     ]
 
+    CLIENT_CHOICES = [
+        ("Personal", "Personal"),
+        ("Company", "Company"),
+    ]
+
+    ASSISTANCE_CHOICES = [
+        ("Prevention", "Prevention"),
+        ("Inspection", "Inspection"),
+        ("Incident Response", "Incident Response"),
+    ]
+
+    DEVICE_CHOICES = [
+        ("Desktop", "Desktop"),
+        ("Laptop", "Laptop"),
+        ("Mobile Phone", "Mobile Phone"),
+        ("Tablet", "Tablet"),
+        ("Server", "Server"),
+        ("Network", "Network"),
+        ("Website", "Website"),
+        ("Other", "Other"),
+    ]
+    
+
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     service_name = models.CharField(max_length=200)
 
+    # NEW FIELDS
+    client_type = models.CharField(
+        max_length=20,
+        choices=CLIENT_CHOICES,
+        default="Personal"
+        
+    )
+
+    assistance_type = models.CharField(
+        max_length=30,
+        choices=ASSISTANCE_CHOICES,
+        default="Inspection"
+    )
+
+    affected_device = models.CharField(
+        max_length=50,
+        choices=DEVICE_CHOICES,
+        default="Other"
+    )
+
+    location = models.CharField(
+        max_length=200,
+        default="Unknown"
+    )
+    incident_days = models.PositiveIntegerField(
+    default=0
+    )  
+
+    incident_days = models.PositiveIntegerField()
+
     description = models.TextField()
+
+    attachment = models.FileField(
+        upload_to="service_requests/",
+        blank=True,
+        null=True
+    )
+    
+    # Contact Information
+    contact_name = models.CharField(
+        max_length=150,
+        blank=True,
+        default=""
+    )
+
+    contact_email = models.EmailField(
+        blank=True,
+        default=""
+    )
+
+    contact_phone = models.CharField(
+        max_length=20,
+        blank=True,
+        default=""
+    )
+
+# Contact Information
+    contact_name = models.CharField(
+        max_length=150,
+        blank=True,
+        default=""
+    )
+
+    contact_email = models.EmailField(
+        blank=True,
+        default=""
+    )
+
+    contact_phone = models.CharField(
+        max_length=20,
+        blank=True,
+        default=""
+    )
+    
+
+    # Service Description
+    description = models.TextField()
+
+    attachment = models.FileField(
+        upload_to="service_requests/",
+        blank=True,
+        null=True
+    )
+
+    
 
     service_number = models.CharField(
         max_length=20,
@@ -49,6 +157,7 @@ class Services(models.Model):
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
+
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -58,9 +167,8 @@ class Services(models.Model):
         if not self.service_number:
             self.service_number = f"SRV-{uuid.uuid4().hex[:8].upper()}"
         super().save(*args, **kwargs)
-# ==========================
+
 # INCIDENT REPORT
-# ==========================
 
 class Incident(models.Model):
 
@@ -91,11 +199,9 @@ class Incident(models.Model):
     ]
 
     # Student who reported the incident
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="reported_incidents"
-    )
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="reported_incidents")
+
+    
 
     # Incident information
     title = models.CharField(max_length=200)
@@ -163,26 +269,9 @@ class Incident(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.status})"
-# ==========================
+
+
 # SUPPORT TICKET
-# ==========================
-
-def generate_ticket_number():
-    while True:
-        year = timezone.now().year
-
-        random_code = "".join(
-            random.choices(
-                string.ascii_uppercase + string.digits,
-                k=6
-            )
-        )
-
-        ticket_number = f"TKT-{year}-{random_code}"
-
-        if not Ticket.objects.filter(ticket_number=ticket_number).exists():
-            return ticket_number
-
 class Ticket(models.Model):
 
     PRIORITY_CHOICES = [
@@ -208,6 +297,22 @@ class Ticket(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
+    )
+
+    incident = models.ForeignKey(
+        Incident,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="tickets"
+    )
+
+    service_request = models.ForeignKey(
+        Services,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="tickets"
     )
 
     subject = models.CharField(max_length=200)
@@ -237,9 +342,24 @@ class Ticket(models.Model):
         default="Open"
     )
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.ticket_number:
+            today = timezone.now().strftime("%Y%m%d")
+            last_ticket = Ticket.objects.order_by("-id").first()
+
+            if last_ticket:
+                try:
+                    last_number = int(last_ticket.ticket_number.split("-")[-1])
+                except:
+                    last_number = last_ticket.id
+            else:
+                last_number = 0
+
+            self.ticket_number = f"CYB-{today}-{last_number + 1:04d}"
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.ticket_number} - {self.subject}"
@@ -271,32 +391,54 @@ class TicketMessage(models.Model):
     def __str__(self):
         return f"{self.sender.username} - {self.ticket.subject}"
 
-# ==========================
 # SECURITY REPORT
-# ==========================
 
 class SecurityReport(models.Model):
 
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE
+    STATUS_CHOICES = [
+        ("Draft", "Draft"),
+        ("Completed", "Completed"),
+    ]
+
+    service = models.ForeignKey(
+        Services,
+        on_delete=models.CASCADE,
+        related_name="reports"
     )
+
+    analyst = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="created_reports"
+    )
+    
 
     title = models.CharField(max_length=200)
 
     report = models.TextField()
 
+    recommendations = models.TextField(
+        blank=True
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="Draft"
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
     )
 
     def __str__(self):
         return self.title
 
-
-# ==========================
 # USER SETTINGS
-# ==========================
 
 
 class UserSettings(models.Model):
@@ -308,9 +450,7 @@ class UserSettings(models.Model):
     ]
 
     
-    # ==========================
     # APPEARANCE SETTINGS
-    # ==========================
     THEME_CHOICES = [
         ("light", "Light"),
         ("dark", "Dark"),
@@ -350,28 +490,20 @@ class UserSettings(models.Model):
 
     compact_layout = models.BooleanField(default=False)
 
-    # ==========================
     # PRIVACY SETTINGS
-    # ==========================
     email_visibility = models.BooleanField(default=True)
     activity_tracking = models.BooleanField(default=True)
     private_profile = models.BooleanField(default=False)
 
-    # ==========================
     # NOTIFICATIONS
-    # ==========================
     email_notifications = models.BooleanField(default=True)
     sms_notifications = models.BooleanField(default=False)
     push_notifications = models.BooleanField(default=True)
 
-    # ==========================
     # SECURITY
-    # ==========================
     two_factor_auth = models.BooleanField(default=False)
 
-    # ==========================
     # ACCOUNT SETTINGS
-    # ==========================
     allow_data_download = models.BooleanField(default=True)
     allow_account_deletion = models.BooleanField(default=True)
 
@@ -381,6 +513,58 @@ class UserSettings(models.Model):
     def __str__(self):
         return f"{self.user.username} Settings"
 
+# INCIDENT INVESTIGATION REPORT
 
+class IncidentReport(models.Model):
+
+    STATUS_CHOICES = [
+        ("Draft", "Draft"),
+        ("Completed", "Completed"),
+    ]
+
+    incident = models.ForeignKey(
+        Incident,
+        on_delete=models.CASCADE,
+        related_name="incident_reports"
+    )
+
+    analyst = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="incident_reports"
+    )
+
+    title = models.CharField(
+        max_length=200
+    )
+
+    report = models.FileField(
+        upload_to="investigation_reports/",
+        blank=True,
+        null=True
+    )
+
+    recommendations = models.TextField(
+        blank=True
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="Draft"
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+
+    def __str__(self):
+        return self.title
 
 

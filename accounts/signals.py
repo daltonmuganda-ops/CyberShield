@@ -35,9 +35,8 @@ urlpatterns = [
         name="professional_incidents"
     ),
 
-     # ==========================
+     
     # Tickets
-    # ==========================
     path(
         "tickets/",
         views.tickets,
@@ -50,9 +49,9 @@ urlpatterns = [
         name="professional_ticket_detail"
     ),
 
-    # ==========================
+
     # Service Requests
-    # ==========================
+
     path(
         "services/",
         views.service_requests,
@@ -65,9 +64,8 @@ urlpatterns = [
         name="professional_service_detail"
     ),
 
-    # ==========================
+
     # Reports
-    # ==========================
     path(
         "reports/",
         views.reports,
@@ -80,18 +78,15 @@ urlpatterns = [
         name="professional_report_detail"
     ),
 
-    # ==========================
     # Notifications
-    # ==========================
     path(
         "notifications/",
         views.notifications,
         name="professional_notifications"
     ),
 
-    # ==========================
+    
     # Profile
-    # ==========================
     path(
         "profile/",
         views.profile,
@@ -110,9 +105,7 @@ urlpatterns = [
         name="professional_change_password"
     ),
 
-    # ==========================
     # Settings
-    # ==========================
     path(
         "settings/",
         views.settings,

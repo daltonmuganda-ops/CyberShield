@@ -1,0 +1,137 @@
+/* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =========================
+   PAGE BACKGROUND
+========================= */
+
+body {
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+/* =========================
+   MAIN CONTENT AREA
+========================= */
+
+.main-content {
+    margin-left: 260px; /* sidebar space */
+    padding: 40px;
+    min-height: 100vh;
+}
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #0f172a;
+}
+
+/* =========================
+   FORM CARD CONTAINER
+========================= */
+
+form {
+    background: #ffffff;
+    max-width: 1000px;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+}
+
+/* =========================
+   LABELS
+========================= */
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #334155;
+}
+
+/* =========================
+   INPUT FIELDS
+========================= */
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    outline: none;
+    transition: 0.3s ease;
+    font-size: 14px;
+    background: #f9fafb;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #2563eb;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* =========================
+   READONLY INPUT
+========================= */
+
+input[readonly] {
+    background: #eef2ff;
+    color: #374151;
+    cursor: not-allowed;
+}
+
+/* =========================
+   TEXTAREA
+========================= */
+
+textarea {
+    resize: none;
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* =========================
+   FORM SPACING
+========================= */
+
+br {
+    display: none; /* removes ugly spacing */
+}

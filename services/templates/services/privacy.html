@@ -22,30 +22,30 @@
 
     <ul class="sidebar-menu">
 
-        <li><a href="{% url 'user_dashboard' %}">📊 Dashboard</a></li>
+        <li><a href="{% url 'user_dashboard' %}"> Dashboard</a></li>
 
-        <li><a href="{% url 'services' %}">🛠 Services</a></li>
+        <li><a href="{% url 'services' %}"> Services</a></li>
 
-        <li><a href="{% url 'request_service' %}">📋 My Requests</a></li>
+        <li><a href="{% url 'request_service' %}"> My Requests</a></li>
 
-        <li><a href="{% url 'incident' %}">⚠ Incidents</a></li>
+        <li><a href="{% url 'incident' %}"> Incidents</a></li>
 
-        <li><a href="{% url 'tickets' %}">🎫 Tickets</a></li>
+        <li><a href="{% url 'tickets' %}"> Tickets</a></li>
 
-        <li><a href="{% url 'reports' %}">📄 Reports</a></li>
+        <li><a href="{% url 'reports' %}"> Reports</a></li>
 
-        <li><a href="{% url 'notifications' %}">🔔 Notifications</a></li>
+        <li><a href="{% url 'notifications' %}"> Notifications</a></li>
 
         <hr>
 
-        <li><a href="{% url 'profile' %}">👤 Profile</a></li>
+        <li><a href="{% url 'profile' %}"> Profile</a></li>
 
         <li class="active">
-            <a href="{% url 'settings' %}">⚙ Settings</a>
+            <a href="{% url 'settings' %}"> Settings</a>
         </li>
 
         <li>
-            <a href="{% url 'logout' %}">🚪 Logout</a>
+            <a href="{% url 'logout' %}"> Logout</a>
         </li>
 
     </ul>
@@ -56,69 +56,72 @@
 <main class="main-content">
 
 <div class="privacy-container">
+    <form method="POST">
 
-    <h1>🔒 Privacy Settings</h1>
+        {% csrf_token %}
 
-    <p class="subtitle">
-        Control how your account information and activity are handled.
-    </p>
+        <h1> Privacy Settings</h1>
 
-    <div class="privacy-card">
+        <p class="subtitle">
+            Control how your account information and activity are handled.
+        </p>
 
-        <h3>Email Visibility</h3>
+        <div class="privacy-card">
 
-        <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider"></span>
-        </label>
+            <h3>Email Visibility</h3>
 
-        <p>Allow administrators to view your email address.</p>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
 
-    </div>
+            <p>Allow administrators to view your email address.</p>
 
-    <div class="privacy-card">
+        </div>
 
-        <h3>Activity Tracking</h3>
+        <div class="privacy-card">
 
-        <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider"></span>
-        </label>
+            <h3>Activity Tracking</h3>
 
-        <p>Allow CyberShield to store activity logs for security purposes.</p>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
 
-    </div>
+            <p>Allow CyberShield to store activity logs for security purposes.</p>
 
-    <div class="privacy-card">
+        </div>
 
-        <h3>Incident Reports</h3>
+        <div class="privacy-card">
 
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider"></span>
-        </label>
+            <h3>Incident Reports</h3>
 
-        <p>Keep submitted incident reports private from other users.</p>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
 
-    </div>
+            <p>Keep submitted incident reports private from other users.</p>
 
-    <div class="privacy-card">
+        </div>
 
-        <h3>Two-Factor Authentication</h3>
+        <div class="privacy-card">
 
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider"></span>
-        </label>
+            <h3>Two-Factor Authentication</h3>
 
-        <p>Enable extra protection for your CyberShield account.</p>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
 
-    </div>
+            <p>Enable extra protection for your CyberShield account.</p>
 
-    <button class="save-btn">
-        💾 Save Changes
-    </button>
+        </div>
 
+        <button class="save-btn">
+             Save Changes
+        </button>
+    </form>    
 </div>
 
 </main>

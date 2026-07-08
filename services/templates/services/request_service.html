@@ -4,6 +4,7 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/request.css' %}">
 <link rel="stylesheet" href="{% static 'css/services.css' %}">
 <aside class="sidebar">
 
@@ -14,43 +15,43 @@
         <ul class="sidebar-menu">
             <li>
                 <a href="{% url 'user_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li>
-                <a href="{% url 'services' %} "> 🛠 Services
+                <a href="{% url 'services' %} ">  Services
                 </a>
             </li>
 
             <li class="active">
                 <a href="{% url 'request_service' %} ">
-                    📋 request services
+                      Request Services
                 </a>
             </li>
             
 
             <li>
                 <a href="{% url 'incident' %}">
-                    ⚠ Incidents
+                     Incidents
                 </a>
             </li>
 
             <li>
                <a href="{% url 'tickets' %}">
-                    🎫 Tickets
+                     Tickets
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'reports' %}">
-                    📄 Reports
+                     Reports
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'notifications'%}">
-                    🔔 Notifications
+                     Notifications
                 </a>
             </li>
 
@@ -58,26 +59,20 @@
 
             <li>
                 <a href="{% url 'profile' %}">
-                    👤 Profile
+                     Profile
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'settings' %}">
-                    ⚙ Settings
+                     Settings
                 </a>
             </li>
-            {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
-            <li>
-                <a href="{% url 'professional_dashboard' %}">
-                    🛡 Professional Portal
-                </a>
-            </li>
-            {% endif %}
+            
 
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -92,7 +87,7 @@
 
 <h2>Request Service</h2>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 
     {% csrf_token %}
 
@@ -104,6 +99,94 @@
         value="{{ service }}"
         readonly
     >
+    <label>Client Type</label>
+
+    <select name="client_type" required>
+        <option value="">Select Client Type</option>
+        <option value="Personal">Personal</option>
+        <option value="Company"> Company</option>
+    </select>
+
+    <br><br>
+
+    <label>Device Affected</label>
+
+    <select name="affected_device" required>
+        <option value="">Select Device</option>
+        <option value="Desktop">Desktop</option>
+        <option value="Laptop">Laptop</option>
+        <option value="Mobile Phone">Mobile Phone</option>
+        <option value="Tablet">Tablet</option>
+        <option value="Server">Server</option>
+        <option value="Network">Network Equipment</option>
+        <option value="Website">Website</option>
+        <option value="Email">Email Account</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <br><br>
+
+
+    <label>Type of Assistance</label>
+
+    <select name="assistance_type" required>
+
+        <option value="">Select Assistance</option>
+
+        <option value="Prevention">
+            Prevention
+        </option>
+
+        <option value="Inspection">
+            Inspection / Security Assessment
+        </option>
+
+        <option value="Incident Response">
+            Incident Response (Incident Occurred)
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <!-- Location -->
+    <label>Location</label>
+
+    <input
+        type="text"
+        name="location"
+        placeholder="e.g. Nairobi Office, Home, TTU Campus"
+        required
+    >
+
+    <br><br>
+    <hr>
+
+    
+
+    <h3>Supporting Evidence</h3>
+
+    <label>Upload Attachment (Optional)</label>
+
+    <input
+        type="file"
+        name="attachment"
+        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip"
+    >
+
+    <br><br>
+        
+    <label>How many days ago did the incident occur?</label>
+
+    <input
+        type="number"
+        name="incident_days"
+        min="0"
+        placeholder="e.g. 3"
+        required
+    >
+
+    <br><br>
 
     <br><br>
 
@@ -124,5 +207,6 @@
 </form>
 
 </main>
+
 
 {% endblock %}

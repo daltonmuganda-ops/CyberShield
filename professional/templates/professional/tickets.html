@@ -6,9 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support Tickets | CyberShield Analyst</title>
-
+    <link rel="stylesheet" href="{% static 'css/professional.css' %}">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'css/tickets.css' %}">
+    
 </head>
 <body>
 
@@ -19,69 +20,62 @@
 
         <div class="logo">
             <h2>🛡 CyberShield</h2>
-            <span>Analyst Portal</span>
+            <p>Analyst Portal</p>
         </div>
 
         <ul class="sidebar-menu">
 
             <li>
                 <a href="{% url 'professional_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_incidents' %}">
-                    ⚠ Incident Management
+                     Incident Management
                 </a>
             </li>
 
             <li>
-                <a href="{% url 'request_service' %}">
-                    🛠 Service Requests
+                <a href="{% url 'professional_services' %}">
+                     Service Requests
                 </a>
             </li>
 
             <li class="active">
-                <a href="#">
-                    🎫 Support Tickets
+                <a href="{% url 'professional_tickets' %}">
+                     Tickets
                 </a>
             </li>
 
             <li>
             <a href="{% url 'report' %}">
                 <i class="fas fa-chart-line"></i>
-                <span>Reports</span>
+                <span>Reports & Analytics</span>
             </a>
             </li>
 
             <li>
-                <a href="#">
-                    👥 Users
+                <a href="/admin/auth/user/">
+                     User Management
                 </a>
             </li>
-
-            <li>
+             <li>
                 <a href="{% url 'professional_notifications' %}">
-                    🔔 Notifications
+                     Notifications
                 </a>
             </li>
-
             <li>
-                <a href="{% url 'professional_profile' %}">
-                    👤 Profile
+                <a href="{% url 'user_dashboard' %}">
+                     user Dashboard
                 </a>
             </li>
 
-            <li>
-                <a href="{% url 'professional_settings' %}">
-                    ⚙ Settings
-                </a>
-            </li>
-
+            
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -93,7 +87,7 @@
     <main class="main-content">
 
         <div class="page-header">
-            <h1>🎫 Support Tickets</h1>
+            <h1> Support Tickets</h1>
             <p>Manage and respond to user support tickets.</p>
         </div>
 
@@ -164,8 +158,11 @@
                                 View
                             </a>
                         </td>
+                        
+
 
                     </tr>
+
 
                 {% empty %}
 

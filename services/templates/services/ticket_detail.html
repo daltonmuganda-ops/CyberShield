@@ -1,40 +1,65 @@
 <h2>{{ ticket.subject }}</h2>
 
 <p>
-Status:
-<strong>{{ ticket.status }}</strong>
+    <strong>Ticket Number:</strong>
+    {{ ticket.ticket_number }}
 </p>
 
 <p>
-Priority:
-<strong>{{ ticket.priority }}</strong>
+    <strong>Status:</strong>
+    {{ ticket.status }}
 </p>
 
 <p>
-Category:
-<strong>{{ ticket.category }}</strong>
+    <strong>Priority:</strong>
+    {{ ticket.priority }}
+</p>
+
+<p>
+    <strong>Category:</strong>
+    {{ ticket.category }}
 </p>
 
 <hr>
 
-{% for msg in conversation %}
+<h3> AI Analysis</h3>
 
-<div style="padding:15px;margin-bottom:15px;border:1px solid #ddd;">
+<div style="padding:15px; margin-bottom:20px; border:1px solid #4CAF50; background:#f7fff7; border-radius:8px;">
 
-{% if msg.is_ai %}
+    {% if ticket.ai_summary %}
 
-<h4>CyberShield AI</h4>
+        <pre style="white-space: pre-wrap;">{{ ticket.ai_summary }}</pre>
 
-{% else %}
+    {% else %}
 
-<h4>{{ msg.sender.username }}</h4>
+        <p>No AI analysis available.</p>
 
-{% endif %}
-
-<p>{{ msg.message }}</p>
-
-<small>{{ msg.created_at }}</small>
+    {% endif %}
 
 </div>
+
+<hr>
+
+<h3>Conversation</h3>
+
+{% for msg in conversation %}
+
+<div style="padding:15px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px;">
+
+    {% if msg.is_ai %}
+        <h4> CyberShield AI</h4>
+    {% else %}
+        <h4>{{ msg.sender.username }}</h4>
+    {% endif %}
+
+    <p>{{ msg.message }}</p>
+
+    <small>{{ msg.created_at }}</small>
+
+</div>
+
+{% empty %}
+
+<p>No conversation yet.</p>
 
 {% endfor %}

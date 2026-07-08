@@ -1,6 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
 <section class="how-it-works">
 
-    <h1>🛡 How CyberShield Works</h1>
+    <h1> How CyberShield Works</h1>
 
     <p>
         CyberShield is a cybersecurity system that helps users report,
@@ -10,7 +15,7 @@
     <div class="steps">
 
         <div class="step">
-            <h2>1️⃣ User Reports a Problem</h2>
+            <h2> User Reports a Problem</h2>
             <p>
                 Users submit cybersecurity issues such as phishing, malware,
                 or system vulnerabilities through the platform.
@@ -18,7 +23,7 @@
         </div>
 
         <div class="step">
-            <h2>2️⃣ System Organizes the Request</h2>
+            <h2> System Organizes the Request</h2>
             <p>
                 Each request is automatically assigned a unique ID,
                 categorized, and given a priority level for proper handling.
@@ -26,7 +31,7 @@
         </div>
 
         <div class="step">
-            <h2>3️⃣ AI Analysis</h2>
+            <h2> AI Analysis</h2>
             <p>
                 The system analyzes the message using AI logic to detect
                 threats and provide instant security recommendations.
@@ -34,7 +39,7 @@
         </div>
 
         <div class="step">
-            <h2>4️⃣ Analyst Review</h2>
+            <h2> Analyst Review</h2>
             <p>
                 Cybersecurity analysts review the request, investigate the issue,
                 and take appropriate action.
@@ -42,7 +47,7 @@
         </div>
 
         <div class="step">
-            <h2>5️⃣ Investigation & Resolution</h2>
+            <h2> Investigation & Resolution</h2>
             <p>
                 The analyst updates the status, writes reports, and resolves the issue
                 based on findings.
@@ -50,7 +55,7 @@
         </div>
 
         <div class="step">
-            <h2>6️⃣ User Feedback</h2>
+            <h2> User Feedback</h2>
             <p>
                 Users receive updates, reports, and recommendations to stay protected
                 from future attacks.
@@ -60,7 +65,7 @@
     </div>
 
     <div class="summary">
-        <h2>⚙ Summary</h2>
+        <h2> Summary</h2>
         <p>
             CyberShield works as a complete cybersecurity control system where
             users report issues, AI analyzes threats, and analysts provide solutions.
@@ -68,3 +73,4 @@
     </div>
 
 </section>
+{% endblock %}

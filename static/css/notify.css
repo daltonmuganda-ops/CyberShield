@@ -1,0 +1,80 @@
+.privacy-container{
+    max-width:800px;
+    margin:30px auto;
+}
+
+.subtitle{
+    color:#777;
+    margin-bottom:25px;
+}
+
+.privacy-card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.privacy-card h3{
+    margin-bottom:10px;
+}
+
+.save-btn{
+    padding:12px 28px;
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.save-btn:hover{
+    opacity:.9;
+}
+
+/* Toggle Switch */
+
+.switch{
+    position:relative;
+    display:inline-block;
+    width:52px;
+    height:28px;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    cursor:pointer;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:#ccc;
+    transition:.3s;
+    border-radius:30px;
+}
+
+.slider:before{
+    position:absolute;
+    content:"";
+    width:22px;
+    height:22px;
+    left:3px;
+    bottom:3px;
+    background:white;
+    transition:.3s;
+    border-radius:50%;
+}
+
+input:checked + .slider{
+    background:#0d6efd;
+}
+
+input:checked + .slider:before{
+    transform:translateX(24px);
+}

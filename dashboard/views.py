@@ -18,20 +18,15 @@ def home(request):
 @login_required(login_url="login")
 def dashboard(request):
 
-    requests = Services.objects.filter(
-        user=request.user
-    ).count()
+    requests = Services.objects.filter(user=request.user).count()
 
-    incidents = Incident.objects.filter(
-        user=request.user
-    ).count()
+    incidents = Incident.objects.filter(user=request.user).count()
 
-    tickets = Ticket.objects.filter(
-        user=request.user
-    ).count()
+    tickets = Ticket.objects.filter(user=request.user).count()
 
+    # ✅ FIXED LINE
     reports = SecurityReport.objects.filter(
-        user=request.user
+        service__user=request.user
     ).count()
 
     context = {
@@ -41,8 +36,4 @@ def dashboard(request):
         "reports": reports,
     }
 
-    return render(
-        request,
-        "dashboard/dashboard.html",
-        context,
-    )
+    return render(request, "dashboard/dashboard.html", context)

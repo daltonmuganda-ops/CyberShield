@@ -19,7 +19,7 @@
     <ul class="sidebar-menu">
         <li>
             <a href="{% url 'user_dashboard' %}">
-                📊 Dashboard
+                 Dashboard
             </a>
         </li>
 
@@ -30,31 +30,31 @@
 
         <li>
             <a href="{% url 'request_service' %} ">
-                📋 My Requests
+                 Request service
             </a>
         </li>
 
         <li>
             <a href="{% url 'incident' %}">
-                ⚠ Incidents
+                Incidents
             </a>
         </li>
 
         <li>
             <a href="{% url 'tickets' %}">
-                🎫 Tickets
+                 Tickets
             </a>
         </li>
 
         <li>
             <a href="{% url 'reports' %}">
-                📄 Reports
+                 Reports
             </a>
         </li>
 
         <li>
             <a href="{% url 'notifications' %}">
-                🔔 Notifications
+                Notifications
             </a>
         </li>
 
@@ -62,19 +62,19 @@
 
         <li>
                 <a href="{% url 'profile' %}">
-                    👤 Profile
+                     Profile
                 </a>
             </li>
 
         <li>
             <a href="{% url 'settings' %}">
-                ⚙ Settings
+                 Settings
             </a>
         </li>
 
         <li>
             <a href="#">
-                🚪 Logout
+                 Logout
             </a>
         </li>
 
@@ -83,63 +83,164 @@
 </aside>
 
 <main class="main-content">
-<div class="container mt-5">
-    <div class="card shadow p-4">
-        <h2 class="text-center mb-4">Edit Profile</h2>
 
-        <form method="POST">
-            {% csrf_token %}
+<div class="edit-profile-card">
 
-            <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text"
-                       name="username"
-                       class="form-control"
-                       value="{{ request.user.username }}">
-            </div>
+    <h1>Edit Profile</h1>
 
-            <div class="mb-3">
-                <label class="form-label">First Name</label>
-                <input type="text"
-                       name="first_name"
-                       class="form-control"
-                       value="{{ request.user.first_name }}">
-            </div>
+    <form method="POST" enctype="multipart/form-data">
 
-            <div class="mb-3">
-                <label class="form-label">Last Name</label>
-                <input type="text"
-                       name="last_name"
-                       class="form-control"
-                       value="{{ request.user.last_name }}">
-            </div>
+        {% csrf_token %}
 
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email"
-                       name="email"
-                       class="form-control"
-                       value="{{ request.user.email }}">
-            </div>
+        <!-- Profile Picture -->
 
-            <div class="mb-3">
-                <label class="form-label">Date of birth</label>
-                <input type="Date of birth"
-                       name="Date of birth"
-                       class="form-control"
-                       value="{{ request.user.date_of_birth }}">
-            </div>
+        <div class="profile-photo-section">
 
-            <button type="submit" class="btn btn-primary">
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" class="profile-image">
+            {% else %}
+                <img src="{% static 'images/default-profile.png' %}" class="profile-image">
+            {% endif %}
+
+            <input type="file" name="profile_picture">
+
+        </div>
+
+        <!-- Username -->
+
+        <div class="form-group">
+            <label>Username</label>
+
+            <input
+                type="text"
+                name="username"
+                value="{{ request.user.username }}">
+        </div>
+
+        <!-- First Name -->
+
+        <div class="form-group">
+            <label>First Name</label>
+
+            <input
+                type="text"
+                name="first_name"
+                value="{{ request.user.first_name }}">
+        </div>
+
+        <!-- Last Name -->
+
+        <div class="form-group">
+            <label>Last Name</label>
+
+            <input
+                type="text"
+                name="last_name"
+                value="{{ request.user.last_name }}">
+        </div>
+
+        <!-- Email -->
+
+        <div class="form-group">
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                value="{{ request.user.email }}">
+        </div>
+
+        <div class="form-group">
+            <label>county</label>
+
+            <input
+                type="county"
+                name="county"
+                value="{{ request.user.county }}">
+        </div>
+
+        
+
+        <div class="form-group">
+            <label>Phone Number</label>
+
+            <input
+                type="text"
+                name="phone"
+                value="{{ profile.phone }}">
+        </div>
+
+        <!-- Bio -->
+
+        <div class="form-group">
+            <label>Bio</label>
+
+            <textarea
+                name="bio"
+                rows="5"
+                placeholder="Tell us something about yourself...">{{ profile.bio }}</textarea>
+        </div>
+
+        <!-- Gender -->
+
+        <div class="form-group">
+
+            <label>Gender</label>
+
+            <select name="gender">
+
+                <option value="">Select Gender</option>
+
+                <option value="Male"
+                {% if profile.gender == "Male" %}selected{% endif %}>
+                    Male
+                </option>
+
+                <option value="Female"
+                {% if profile.gender == "Female" %}selected{% endif %}>
+                    Female
+                </option>
+
+                <option value="Other"
+                {% if profile.gender == "Other" %}selected{% endif %}>
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- Date of Birth -->
+
+        <div class="form-group">
+
+            <label>Date of Birth</label>
+
+            <input
+                type="date"
+                name="date_of_birth"
+                value="{{ profile.date_of_birth|date:'Y-m-d' }}">
+
+        </div>
+
+        <div class="buttons">
+
+            <button type="submit" class="save-btn">
                 Save Changes
             </button>
 
-            <a href="{% url 'profile' %}" class="btn btn-secondary">
+            <a href="{% url 'profile' %}" class="cancel-btn">
                 Cancel
             </a>
 
-        </form>
-    </div>
+        </div>
+
+    </form>
+
 </div>
+
 </main>
+
+</body>
+</html>
 {% endblock %}

@@ -1,0 +1,9 @@
+<h2>Upload Investigation Report for {{ incident.title }}</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="file" name="investigation_report" required>
+
+    <button type="submit">Upload</button>
+</form>

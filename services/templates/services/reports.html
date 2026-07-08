@@ -13,65 +13,64 @@
         <ul class="sidebar-menu">
             <li>
                 <a href="{% url 'user_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li >
-                <a href="{% url 'services' %}"> 🛠 Services
+                <a href="{% url 'services' %}">  Services
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'request_service' %} ">
-                    📋 My Requests
+                      Request Services
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'incident' %}">
-                    ⚠ Incidents
+                     Incidents
                 </a>
             </li>
 
             <li>
                <a href="{% url 'tickets' %}">
-                    🎫 Tickets
+                     Tickets
                 </a>
             </li>
 
             <li class="active">
                 <a href="{% url 'reports' %}">
-                    📄 Reports
+                     Reports
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'notifications' %}">
-                    🔔 Notifications
+                     Notifications
                 </a>
             </li>
 
             <hr>
+             <li>
+                <a href="{% url 'profile' %}">
+                     Profile
+                </a>
+            </li>
+
 
             
 
             <li>
                 <a href="{% url 'settings' %}">
-                    ⚙ Settings
+                    Settings
                 </a>
             </li>
-            {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
-            <li>
-                <a href="{% url 'professional_dashboard' %}">
-                    🛡 Professional Portal
-                </a>
-            </li>
-            {% endif %}
-
+            
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -84,7 +83,7 @@
 
 <div class="report-container">
 
-    <h1>📄 Investigation Reports</h1>
+    <h1> Investigation Reports</h1>
 
     <table>
 
@@ -121,23 +120,9 @@
             </td>
 
             <td>
-
-                {% if report.report_file %}
-
-                <a href="{{ report.report_file.url }}"
-                   class="download-btn"
-                   download>
-
-                    ⬇ Download
-
-                </a>
-
-                {% else %}
-
-                Awaiting Investigation
-
-                {% endif %}
-
+            <a href="{% url 'download_report' report.id %}" class="download-btn">
+                Download
+            </a>
             </td>
 
         </tr>

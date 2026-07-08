@@ -9,6 +9,9 @@
 
     <link rel="stylesheet" href="{% static 'css/professional.css' %}">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+     {% if request.user.settings.theme == "dark" %}
+    <link rel="stylesheet" href="{% static 'css/dark.css' %}">
+    {% endif %}
 </head>
 
 <body>
@@ -27,61 +30,58 @@
 
             <li class="active">
                 <a href="{% url 'professional_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_incidents' %}">
-                    🚨 Incident Management
+                     Incident Management
                 </a>
             </li>
             
             <li>
                 <a href="{% url 'professional_services' %}">
-                    🛠 Service Requests
+                     Service Requests
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_tickets' %}">
-                    🎫 Tickets
+                     Tickets
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'report' %}">
-                    📈 Reports & Analytics
+                     Reports & Analytics
                 </a>
             </li>
 
             <li>
                 <a href="/admin/auth/user/">
-                    👥 User Management
+                     User Management
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_notifications' %}">
-                    🔔 Notifications
+                     Notifications
                 </a>
             </li>
 
-            <li>
-                <a href="{% url 'professional_profile' %}">
-                    👤 My Profile
-                </a>
-            </li>
+           
 
+            
             <li>
-                <a href="{% url 'professional_settings' %}">
-                    ⚙️ Settings
+                <a href="{% url 'user_dashboard' %}">
+                     user Dashboard
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -110,18 +110,13 @@
 
         </header>
 
-        <!-- Statistics -->
+        Statistics 
 
         <section class="cards">
 
             <div class="card">
                 <h2>{{ total_incidents }}</h2>
                 <p>Total Incidents</p>
-            </div>
-
-            <div class="card">
-                <h2>{{ pending_incidents }}</h2>
-                <p>Pending</p>
             </div>
 
             <div class="card">
@@ -174,7 +169,7 @@
 
                 <tbody>
 
-                {% for incident in recent_incidents %}
+                {% for incident in latest_incidents %}
 
                     <tr>
 
@@ -210,7 +205,7 @@
 
         </section>
 
-        <!-- Tickets -->
+        <Ticket>
 
         <section class="panel">
 
@@ -238,7 +233,7 @@
 
                 <tbody>
 
-                {% for ticket in recent_tickets %}
+                {% for ticket in latest_tickets %}
 
                     <tr>
 
@@ -302,7 +297,7 @@
 
                 <tbody>
 
-                {% for request in pending_requests %}
+                {% for request in latest_requests %}
 
                     <tr>
 
@@ -342,20 +337,16 @@
 
         <section class="actions">
 
-            <a href="#" class="btn">
+            <a href="{% url 'professional_incidents' %}" class="btn">
                 View Incidents
             </a>
 
-            <a href="#" class="btn">
+            <a href="{% url 'professional_tickets' %}" class="btn">
                 Manage Tickets
             </a>
 
-            <a href="#" class="btn">
+            <a href="{% url 'professional_services' %}" class="btn">
                 Review Requests
-            </a>
-
-            <a href="#" class="btn">
-                Upload Report
             </a>
 
         </section>

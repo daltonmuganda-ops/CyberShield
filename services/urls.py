@@ -30,12 +30,7 @@ urlpatterns = [
         name="tickets"
     ),
 
-    path(
-        "create-ticket/",
-        views.create_ticket,
-        name="create_ticket"
-    ),
-
+    
     path(
         "reports/",
         views.reports,
@@ -95,4 +90,15 @@ urlpatterns = [
         views.delete_account,
         name="delete_account"
     ),
+
+    path(
+    "notify/",
+    views.notify,
+    name="notify",
+    ),
+    path(
+    "reports/download/<int:pk>/",
+    views.download_report,
+    name="download_report",
+),
 ]

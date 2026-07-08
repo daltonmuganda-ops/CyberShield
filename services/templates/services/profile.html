@@ -2,11 +2,8 @@
 
 {% load static %}
 
-{% block content %}
-
-
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 
 <aside class="sidebar">
 
@@ -15,72 +12,39 @@
     </div>
 
     <ul class="sidebar-menu">
-        <li>
-            <a href="{% url 'user_dashboard' %}">
-                📊 Dashboard
-            </a>
-        </li>
 
-        <li >
-            <a href="{% url 'services' %}"> 🛠 Services
-            </a>
-        </li>
+        <li><a href="{% url 'user_dashboard' %}"> Dashboard</a></li>
 
-        <li>
-            <a href="{% url 'request_service' %} ">
-                📋 My Requests
-            </a>
-        </li>
+        <li><a href="{% url 'services' %}"> Services</a></li>
 
-        <li>
-            <a href="{% url 'incident' %}">
-                ⚠ Incidents
-            </a>
-        </li>
+        <li><a href="{% url 'request_service' %}">  Request Services</a></li>
 
-        <li>
-            <a href="{% url 'tickets' %}">
-                🎫 Tickets
-            </a>
-        </li>
+        <li><a href="{% url 'incident' %}"> Incidents</a></li>
 
-        <li>
-            <a href="{% url 'reports' %}">
-                📄 Reports
-            </a>
-        </li>
+        <li><a href="{% url 'tickets' %}"> Tickets</a></li>
 
-        <li>
-            <a href="{% url 'notifications' %}">
-                🔔 Notifications
-            </a>
-        </li>
+        <li><a href="{% url 'reports' %}"> Reports</a></li>
+
+        <li><a href="{% url 'notifications' %}"> Notifications</a></li>
 
         <hr>
 
-       <li>
+        <li class="active">
+            <a href="{% url 'profile' %}">
+                 Profile
+            </a>
+        </li>
 
-       <li>
-                <a href="{% url 'profile' %}">
-                    👤 Profile
-                </a>
-            </li>
         <li>
             <a href="{% url 'settings' %}">
-                ⚙ Settings
+                 Settings
             </a>
         </li>
-         {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
-        <li>
-            <a href="{% url 'professional_dashboard' %}">
-                🛡 Professional Portal
-            </a>
-        </li>
-        {% endif %}
 
+        
         <li>
             <a href="{% url 'logout' %}">
-                🚪 Logout
+                 Logout
             </a>
         </li>
 
@@ -88,106 +52,97 @@
 
 </aside>
 
-
-
-{% block title %}My Profile{% endblock %}
 <main class="main-content">
-{% load static %}
 
+<div class="profile-container">
 
-<h2>My Profile</h2>
+<div class="profile-card">
 
-<form method="POST" enctype="multipart/form-data">
+    <div class="top-section">
 
-    {% csrf_token %}
+        <div class="photo">
 
-    <div>
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" class="profile-image">
+            {% else %}
+                <img src="{% static 'images/default-profile.png' %}" class="profile-image">
+            {% endif %}
 
-        {% if profile.profile_picture %}
-            <img src="{{ profile.profile_picture.url }}"
-                 width="150"
-                 height="150">
-        {% endif %}
+        </div>
+
+        <div class="user-info">
+
+            <h1>
+                {{ request.user.first_name }}
+                {{ request.user.last_name }}
+            </h1>
+
+            <span class="role">
+                {{ request.user.settings.role }}
+            </span>
+
+            <p class="bio">
+                {{ profile.bio|default:"No bio added yet." }}
+            </p>
+
+            <a href="{% url 'edit_profile' %}" class="edit-btn">
+                 Edit Profile
+            </a>
+
+        </div>
 
     </div>
 
-    <br>
+    <hr>
 
-    <label>Profile Picture</label>
+    <div class="details">
 
-    <input
-        type="file"
-        name="profile_picture"
-    >
+        <div class="detail-box">
+            <strong>Username</strong>
+            <p>{{ request.user.username }}</p>
+        </div>
 
-    <br><br>
+        <div class="detail-box">
+            <strong>Email</strong>
+            <p>{{ request.user.email }}</p>
+        </div>
 
-    <label>First Name</label>
+        <div class="detail-box">
+            <strong>Phone</strong>
+            <p>{{ profile.phone|default:"Not Provided" }}</p>
+        </div>
 
-    <input
-        type="text"
-        name="first_name"
-        value="{{ request.user.first_name }}"
-    >
+        <div class="detail-box">
+            <strong>Gender</strong>
+            <p>{{ profile.gender|default:"Not Provided" }}</p>
+        </div>
 
-    <br><br>
+        <div class="detail-box">
+            <strong>Date of Birth</strong>
+            <p>{{ profile.date_of_birth|default:"Not Provided" }}</p>
+        </div>
 
-    <label>Last Name</label>
+        <div class="detail-box">
+            <strong>Address</strong>
+            <p>{{ profile.address|default:"Not Provided" }}</p>
+        </div>
 
-    <input
-        type="text"
-        name="last_name"
-        value="{{ request.user.last_name }}"
-    >
+        <div class="detail-box">
+            <strong>County</strong>
+            <p>{{ profile.county|default:"Not Provided" }}</p>
+        </div>
 
-    <br><br>
+        <div class="detail-box">
+            <strong>Member Since</strong>
+            <p>{{ request.user.date_joined|date:"d M Y" }}</p>
+        </div>
 
-    <label>Email</label>
+    </div>
 
-    <input
-        type="email"
-        name="email"
-        value="{{ request.user.email }}"
-    >
+</div>
 
-    <br><br>
+</div>
 
-    <label>Phone</label>
-
-    <input
-        type="text"
-        name="phone"
-        value="{{ profile.phone }}"
-    >
-
-    <br><br>
-
-    <label>County</label>
-
-    <input
-        type="text"
-        name="county"
-        value="{{ profile.county }}"
-    >
-
-    <br><br>
-
-    <label>Address</label>
-
-    <textarea
-        name="address"
-        rows="4"
-    >{{ profile.address }}</textarea>
-
-    <br><br>
-
-    <button type="submit">
-        Update Profile
-    </button>
-
-</form>
-
-{% endblock %}
 </main>
 
 <script>

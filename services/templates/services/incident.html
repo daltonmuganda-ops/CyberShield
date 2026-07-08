@@ -14,42 +14,42 @@
     <ul class="sidebar-menu">
         <li>
             <a href="{% url 'user_dashboard' %}">
-                📊 Dashboard
+                 Dashboard
             </a>
         </li>
 
         <li >
-            <a href="{% url 'services' %}"> 🛠 Services
+            <a href="{% url 'services' %}">  Services
             </a>
         </li>
 
         <li>
             <a href="{% url 'request_service' %} ">
-                📋 My Requests
+                  Request Services
             </a>
         </li>
 
         <li class="active">
             <a href="{% url 'incident' %}">
-                ⚠ Incidents
+                 Incidents
             </a>
         </li>
 
         <li>
           <a href="{% url 'tickets' %}">
-                🎫 Tickets
+                 Tickets
             </a>
         </li>
 
         <li>
             <a href="{% url 'reports' %}">
-                📄 Reports
+                 Reports
             </a>
         </li>
 
         <li>
             <a href="{% url 'notifications' %}">
-                🔔 Notifications
+                 Notifications
             </a>
         </li>
 
@@ -57,19 +57,19 @@
 
         <li>
             <a href="{% url 'profile' %}">
-                👤 Profile
+                 Profile
             </a>
         </li>
 
         <li>
             <a href="{% url 'settings' %}">
-                ⚙ Settings
+                 Settings
             </a>
         </li>
 
         <li>
             <a href="{% url 'logout' %}">
-                🚪 Logout
+                 Logout
             </a>
         </li>
 
@@ -82,12 +82,13 @@
 {% load static %}
 <main class="main-content">
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/request.css' %}">
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 <link rel="stylesheet" href="{% static 'css/incident.css' %}">
 
 <div class="incident-container">
 
-    <h2>⚠ Report Cyber Incident</h2>
+    <h2>Report Cyber Incident</h2>
 
     <form method="POST" enctype="multipart/form-data">
 
@@ -114,7 +115,7 @@
                 <option>Ransomware</option>
                 <option>DDoS</option>
                 <option>Data Breach</option>
-                <option>Account Compromise</option>
+                <option>Unauthorized Access</option>
                 <option>Social Engineering</option>
                 <option>Other</option>
 
@@ -127,12 +128,11 @@
             <label>Incident Statement</label>
 
             <textarea
-                name="statement"
+                name="description"
                 rows="6"
                 placeholder="Describe what happened..."
                 required
             ></textarea>
-
         </div>
 
         <div class="form-group">

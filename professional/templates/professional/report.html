@@ -19,68 +19,63 @@
 
         <div class="logo">
             <h2>🛡 CyberShield</h2>
-            <span>Analyst Portal</span>
+            <p>Analyst Portal</p>
         </div>
 
         <ul class="sidebar-menu">
 
             <li>
                 <a href="{% url 'professional_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_incidents' %}">
-                    🚨 Incident Management
+                     Incident Management
                 </a>
             </li>
             
             <li>
                 <a href="{% url 'professional_services' %}">
-                    🛠 Service Requests
+                     Service Requests
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_tickets' %}">
-                    🎫 Tickets
+                     Tickets
                 </a>
             </li>
 
             <li class="active">
                 <a href="{% url 'report' %}">
-                    📈 Reports & Analytics
+                     Reports & Analytics
                 </a>
             </li>
 
             <li>
                 <a href="/admin/auth/user/">
-                    👥 User Management
+                     User Management
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_notifications' %}">
-                    🔔 Notifications
+                     Notifications
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'user_dashboard' %}">
+                     user Dashboard
                 </a>
             </li>
 
-            <li>
-                <a href="{% url 'professional_profile' %}">
-                    👤 My Profile
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'professional_settings' %}">
-                    ⚙️ Settings
-                </a>
-            </li>
+           
 
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -92,9 +87,10 @@
     <main class="main-content">
 
         <div class="page-header">
-            <h1>📄 Investigation Reports</h1>
+            <h1> Investigation Reports</h1>
             <p>View and manage completed cybersecurity investigation reports.</p>
         </div>
+        
 
         <div class="table-container">
 
@@ -109,6 +105,7 @@
                         <th>Status</th>
                         <th>Date</th>
                         <th>Action</th>
+            
                     </tr>
 
                 </thead>
@@ -121,9 +118,9 @@
 
                         <td>#{{ report.id }}</td>
 
-                        <td>{{ report.title }}</td>
+                        <td>{{ report.incident.title }}</td>
 
-                        <td>{{ report.user.username }}</td>
+                        <td>{{ report.incident.user.username  }}</td>
 
                         <td>
 
@@ -147,7 +144,7 @@
 
                         <td>
 
-                            <a href="{% url 'professional_report_detail' report.id %}" class="btn-view">
+                            <a href="{% url 'view_report' report.id %}" class="btn-view">
                                 View
                             </a>
 
@@ -164,6 +161,7 @@
                             No investigation reports available.
 
                         </td>
+                        
 
                     </tr>
 

@@ -9,6 +9,11 @@
 
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+    <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+    {% if request.user.settings.theme == "dark" %}
+    <link rel="stylesheet" href="{% static 'css/dark.css' %}">
+    {% endif %}
+
 </head>
 
 <body>
@@ -24,43 +29,43 @@
 
             <li>
                 <a href="{% url 'user_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'services' %}">
-                    🛠 Services
+                     Services
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'request_service' %}">
-                    📋 My Requests
+                     Request Services
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'incident' %}">
-                    ⚠ Incidents
+                     Incidents
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'tickets' %}">
-                    🎫 Tickets
+                     Tickets
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'reports' %}">
-                    📄 Reports
+                     Reports
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'notifications' %}">
-                    🔔 Notifications
+                     Notifications
                 </a>
             </li>
 
@@ -68,26 +73,20 @@
 
             <li>
                 <a href="{% url 'profile' %}">
-                    👤 Profile
+                     Profile
                 </a>
             </li>
 
             <li class="active">
                 <a href="{% url 'settings' %}">
-                    ⚙ Settings
+                     Settings
                 </a>
             </li>
-            {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
-            <li>
-                <a href="{% url 'professional_dashboard' %}">
-                    🛡 Professional Portal
-                </a>
-            </li>
-            {% endif %}
+            
 
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -101,7 +100,7 @@
         <div class="settings-container">
 
             <div class="settings-header">
-                <h1>⚙️ Settings</h1>
+                <h1> Settings</h1>
                 <p>
                     Manage your CyberShield account and customize your preferences.
                 </p>
@@ -111,7 +110,7 @@
 
                 <!-- Profile -->
                 <a href="{% url 'edit_profile' %}" class="setting-card">
-                    <div class="icon">👤</div>
+                    <div class="icon"></div>
 
                     <div class="details">
                         <h3>Profile</h3>
@@ -121,7 +120,7 @@
 
                 <!-- Security -->
                 <a href="{% url 'change_password' %}" class="setting-card">
-                    <div class="icon">🔒</div>
+                    <div class="icon"></div>
 
                     <div class="details">
                         <h3>Security</h3>
@@ -131,7 +130,7 @@
 
                 <!-- Notifications -->
                 <a href="{% url 'notifications' %}" class="setting-card">
-                    <div class="icon">🔔</div>
+                    <div class="icon"></div>
 
                     <div class="details">
                         <h3>Notifications</h3>
@@ -141,7 +140,7 @@
 
                 <!-- Appearance -->
                 <a href="{% url 'appearance' %}" class="setting-card">
-                    <div class="icon">🎨</div>
+                    <div class="icon"></div>
 
                     <div class="details">
                         <h3>Appearance</h3>
@@ -151,7 +150,7 @@
 
                 <!-- Privacy -->
                 <a href="{% url 'privacy' %}" class="setting-card">
-                    <div class="icon">🛡️</div>
+                    <div class="icon"></div>
 
                     <div class="details">
                         <h3>Privacy</h3>
@@ -161,13 +160,28 @@
 
                 <!-- Account -->
                 <a href="{% url 'account' %}" class="setting-card danger">
-                    <div class="icon">⚠️</div>
+                    <div class="icon"></div>
 
                     <div class="details">
                         <h3>Account</h3>
                         <p>Download your data, delete your account or logout.</p>
                     </div>
                 </a>
+        
+
+            {% if request.user.settings.role == "analyst" or request.user.settings.role == "admin" %}
+                <a href="{% url 'professional_dashboard' %}">
+
+                    <div class="details">
+                
+                        <button type="submit" class="btn btn-primary">🛡 Professional Portal</button>
+                    </div>
+            
+               
+
+                    
+                </a>
+            {% endif %}
 
             </div>
 

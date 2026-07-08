@@ -19,68 +19,68 @@
 
         <div class="logo">
             <h2>🛡 CyberShield</h2>
-            <span>Analyst Portal</span>
+            <p>Analyst Portal</p>
         </div>
 
         <ul class="sidebar-menu">
 
             <li>
                 <a href="{% url 'professional_dashboard' %}">
-                    📊 Dashboard
+                     Dashboard
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_incidents' %}">
-                    🚨 Incident Management
+                     Incident Management
                 </a>
             </li>
             
             <li>
                 <a href="{% url 'professional_services' %}">
-                    🛠 Service Requests
+                     Service Requests
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_tickets' %}">
-                    🎫 Tickets
+                     Tickets
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'report' %}">
-                    📈 Reports & Analytics
+                     Reports & Analytics
                 </a>
             </li>
 
             <li>
                 <a href="/admin/auth/user/">
-                    👥 User Management
+                     User Management
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_notifications' %}">
-                    🔔 Notifications
+                     Notifications
                 </a>
             </li>
 
             <li class="active">
                 <a href="{% url 'professional_profile' %}">
-                    👤 My Profile
+                     My Profile
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'professional_settings' %}">
-                    ⚙️ Settings
+                     Settings
                 </a>
             </li>
 
             <li>
                 <a href="{% url 'logout' %}">
-                    🚪 Logout
+                     Logout
                 </a>
             </li>
 
@@ -89,6 +89,7 @@
     </aside>
 
     <!-- Main Content -->
+     
     <main class="main-content">
 
         <div class="profile-container">
@@ -96,7 +97,7 @@
             <div class="profile-header">
 
                 <div class="profile-avatar">
-                    👨‍💻
+                    
                 </div>
 
                 <h1>{{ request.user.get_full_name|default:request.user.username }}</h1>
@@ -151,11 +152,11 @@
             <div class="profile-actions">
 
                 <a href="{% url 'edit_profile' %}" class="btn-edit">
-                    ✏ Edit Profile
+                     Edit Profile
                 </a>
 
                 <a href="{% url 'change_password' %}" class="btn-password">
-                    🔑 Change Password
+                     Change Password
                 </a>
 
             </div>

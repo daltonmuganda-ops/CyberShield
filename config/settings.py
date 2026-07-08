@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'dashboard',
     'professional',
     'accounts.apps.AccountsConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,26 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGIN_URL = "login"
 LOGOUT_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "user_dashboard"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# ===========================
+# M-PESA DARAJA SETTINGS
+# ===========================
+
+MPESA_ENVIRONMENT = "sandbox"
+
+# Your Daraja App Credentials
+MPESA_CONSUMER_KEY = "TXb5mM2I5SjaGa1vM24fZ9tAIr7y7CFVcTGHtEEKmFa68t8Y"
+MPESA_CONSUMER_SECRET = "aXOBjpB7udCWfCD6a9XhX8eKQGU3d9jri1gvYx9XfYlGMCBDl5s0ZNr7Q4oSdQD2"
+
+# Sandbox Business Shortcode
+MPESA_SHORTCODE = "174379"
+
+# Sandbox Passkey
+MPESA_PASSKEY = "N/A"
+
+# Callback URL
+MPESA_CALLBACK_URL = "https://YOUR_NGROK_URL.ngrok-free.app/payments/callback/"
